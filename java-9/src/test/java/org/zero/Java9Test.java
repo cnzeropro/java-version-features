@@ -6,13 +6,13 @@ public class Java9Test {
     Java9 java9 = new Java9();
 
     @Test
-    public void printer() {
-        java9.printer();
+    public void privateMethod() {
+        java9.privateMethod();
     }
 
     @Test
-    public void diamondOperatorUpgrade() {
-        java9.diamondOperatorUpgrade();
+    public void diamondOperator() {
+        java9.diamondOperator();
     }
 
     @Test
@@ -21,12 +21,12 @@ public class Java9Test {
     }
 
     @Test
-    public void of() {
-        java9.of();
+    public void ofMethod() {
+        java9.ofMethod();
     }
 
     @Test
-    public void enhanceStreamAPI() {
-        java9.enhanceStreamAPI();
+    public void streamApi() {
+        java9.streamApi();
     }
 }

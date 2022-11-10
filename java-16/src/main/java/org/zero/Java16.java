@@ -7,9 +7,9 @@ package org.zero;
 public class Java16 {
 
     /**
-     * record关键字引入
+     * 新增record（记录）
      */
-    public void recordTest() {
+    public void record() {
         Triangle triangle = new Triangle(9, 7, 6);
         System.out.println(triangle);
         TriangleRecord triangleRecord = new TriangleRecord(4, 8, 7);
@@ -19,7 +19,7 @@ public class Java16 {
     /**
      * instanceof关键字升级
      */
-    public void instanceofTest() {
+    public void instanceofKeyword() {
         Triangle triangle = new RightTriangle(3, 4, 5);
 
         // 原来写法

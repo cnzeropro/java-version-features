@@ -3,7 +3,7 @@ package org.zero;
 import org.junit.Test;
 
 public class Java10Test {
-    Java10 java10 =new Java10();
+    Java10 java10 = new Java10();
 
     @Test
     public void varKeyword() {

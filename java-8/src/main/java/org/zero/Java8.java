@@ -211,7 +211,7 @@ public class Java8 {
      * <p>
      * 现在接口除了抽象方法，还可定义默认和静态方法
      */
-    public void printer() {
+    public void defaultAndStaticMethod() {
         Printer printer = System.out::println;
         printer.print1("调用接口抽象方法（已通过方法引用实现）");
         printer.print2("调用接口默认方法");
@@ -223,7 +223,7 @@ public class Java8 {
      * <p>
      * 主要用于非关系数据库数据的处理
      */
-    public void streamAPI() {
+    public void stream() {
         // 选出性别为‘M’的学生，并将其年龄减少2岁，性别改为‘男’，最后按成绩降序排序
         List<Student> students = Arrays.asList(
                         new Student("CDTU-1", "小明", 'M', 19, 89.6),
@@ -259,12 +259,12 @@ public class Java8 {
      * 用于避免臭名昭著的空指针异常
      */
     public void optionalClass() {
-        Student student = null;
-        student = Optional
-                .ofNullable(student)
+        Student studentIn = null;
+        Student studentOut = Optional
+                .ofNullable(studentIn)
                 .orElse(new Student("Undefined", "Unknown", 'U', -1, 0.0));
 
-        System.out.println(student.getName());
+        System.out.println(studentOut.getName());
     }
 
     /**
@@ -277,7 +277,7 @@ public class Java8 {
      *     <li>时区处理麻烦 − 日期类并不提供国际化，没有时区支持，因此Java引入了java.util.Calendar和java.util.TimeZone类，但他们同样存在上述所有的问题。</li>
      * </ul>
      */
-    public void dateTimeAPI() {
+    public void dateTimeApi() {
         Date date = new Date();
         System.out.println("Date：" + date);
 

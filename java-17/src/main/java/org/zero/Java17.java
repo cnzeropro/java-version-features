@@ -5,7 +5,10 @@ package org.zero;
  * @date 2021/11/17 19:41
  */
 public class Java17 {
-    public void sealedTest() {
+    /**
+     * 新增sealed（密封）类
+     */
+    public void sealedClass() {
         Pet pet1 = new Cat("喵喵", 3);
         pet1.sleep();
 

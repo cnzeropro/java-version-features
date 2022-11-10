@@ -32,13 +32,13 @@ public class Java8Test {
     }
 
     @Test
-    public void printer() {
-        java8.printer();
+    public void defaultAndStaticMethod() {
+        java8.defaultAndStaticMethod();
     }
 
     @Test
-    public void streamAPI() {
-        java8.streamAPI();
+    public void stream() {
+        java8.stream();
     }
 
     @Test
@@ -47,8 +47,8 @@ public class Java8Test {
     }
 
     @Test
-    public void dateTimeAPI() {
-        java8.dateTimeAPI();
+    public void dateTimeApi() {
+        java8.dateTimeApi();
     }
 
     @Test

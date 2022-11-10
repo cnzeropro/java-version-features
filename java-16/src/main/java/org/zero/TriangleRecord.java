@@ -12,6 +12,10 @@ package org.zero;
  */
 public record TriangleRecord(double a, double b, double c) {
     public TriangleRecord {
+        init();
+    }
+
+    private void init() {
         if (a <= 0 || b <= 0 || c <= 0) {
             throw new IllegalArgumentException("三角形三条边都必须大于0");
         } else if (a + b <= c || a + c <= b || b + c <= a) {
