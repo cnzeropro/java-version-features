@@ -2,6 +2,8 @@ package org.zero;
 
 import org.junit.Test;
 
+import javax.script.ScriptException;
+
 public class Java8Test {
 
     Java8 java8 = new Java8();
@@ -37,8 +39,8 @@ public class Java8Test {
     }
 
     @Test
-    public void stream() {
-        java8.stream();
+    public void streamApi() {
+        java8.streamApi();
     }
 
     @Test
@@ -54,5 +56,21 @@ public class Java8Test {
     @Test
     public void base64() {
         java8.base64();
+    }
+
+    @Test
+    public void nashorn() throws ScriptException {
+        java8.nashorn();
+    }
+
+    @Test
+    public void repeatableAnnotation() {
+        java8.repeatableAnnotation();
+    }
+
+
+    @Test
+    public void parallelArray() {
+        java8.parallelArray();
     }
 }

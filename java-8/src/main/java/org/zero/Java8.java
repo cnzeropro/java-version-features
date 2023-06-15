@@ -1,5 +1,8 @@
 package org.zero;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.nio.charset.StandardCharsets;
 import java.time.Clock;
 import java.time.Instant;
@@ -13,36 +16,51 @@ import java.util.Base64;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.TimeZone;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * jdk1.8 新特性
  * <p>
- * 1.Lambda表达式
+ * 1.【new】Lambda表达式
  * <p>
- * 2.方法引用
+ * 2.【new】方法引用
  * <p>
- * 3.构造器引用
+ * 3.【new】构造器引用
  * <p>
- * 4.数组引用
+ * 4.【new】数组引用
  * <p>
- * 5.四大内置核心函数式接口
+ * 5.【new】四大内置核心函数式接口
  * <p>
- * 6.接口新增默认方法与静态方法
+ * 6.【new】接口的默认方法与静态方法
  * <p>
- * 7.新增Stream管道流操作
+ * 7.【new】Stream管道流操作
  * <p>
- * 8.新增Optional类
+ * 8.【new】Optional类
  * <p>
- * 9.增加新的时间日期API
+ * 9.【new】日期时间API（Date-Time API(JSR 310)）
  * <p>
- * 10.Base64编码成为Java类库的标准
+ * 10.【new】Base64编码成为Java类库的标准
+ * <p>
+ * 11.【new】Nashorn JavaScript引擎（取代Rhino JavaScript引擎）
+ * <p>
+ * 12.【new】@Repeatable定义重复注解
+ * <p>
+ * 13.【new】对数组的并行操作
+ * <p>
+ * 14.【new】JUC包新增类用于并发增强
+ * <p>
+ * 15.【new】类依赖分析工具：jdeps
+ * <p>
+ * 16.【update】JVM内存永久代（Permgen）已经被元空间（Metaspace）替换（JEP 122）。
+ * JVM参数-XX:PermSize和–XX:MaxPermSize分别被XX:MetaSpaceSize和-XX:MaxMetaspaceSize代替
  *
  * @author Zero
  */
@@ -79,7 +97,7 @@ public class Java8 {
      * 应用场景：实现函数式接口
      */
     public void lambdaExpression() {
-        //传统的实现方法
+        // 传统的实现方法
         Runnable runnable1 = new Runnable() {
             @Override
             public void run() {
@@ -88,7 +106,7 @@ public class Java8 {
         };
         runnable1.run();
 
-        //jdk 1.8的实现方法
+        // jdk 1.8的实现方法
         Runnable runnable2 = () -> System.out.println("jdk 1.8实现：使用Lambda表达式实现");
         runnable2.run();
     }
@@ -108,7 +126,7 @@ public class Java8 {
      */
     public void methodReference() {
         System.out.println("~~~对象::实例方法名~~~");
-        String string = new String("java");
+        String string = "java";
         Predicate<String> predicate1 = s -> string.equals(s);
         System.out.println("Lambda表达式实现：" + predicate1.test("Java"));
         Predicate<String> predicate2 = string::equals;
@@ -124,9 +142,9 @@ public class Java8 {
 
         System.out.println("~~~类::实例方法名~~~");
         Function<String, String> function1 = s -> s.toLowerCase();
-        System.out.println("Lambda表达式实现：" + function1.apply("JAVA"));
+        System.out.println("Lambda表达式实现：" + function1.apply("JAVA8"));
         Function<String, String> function2 = String::toLowerCase;
-        System.out.println("方法引用实现：" + function2.apply("JAVA"));
+        System.out.println("方法引用实现：" + function2.apply("JAVA8"));
     }
 
     /**
@@ -181,7 +199,7 @@ public class Java8 {
     public void functionalInterface() {
         FunctionalInterfaces functionalInterfaces = new FunctionalInterfaces();
 
-        //供给型接口
+        // 供给型接口
         Student student = functionalInterfaces.supplierTest(() ->
                 new Student("YY-" + (int) (Math.random() * 1e8) + 1,
                         "小小",
@@ -191,19 +209,16 @@ public class Java8 {
         );
 
         System.out.print("该同学是：");
-        //消费型接口
+        // 消费型接口
         functionalInterfaces.consumerTest(student, System.out::println);
 
-        //断言型接口
+        // 断言型接口
         System.out.println("该同学成绩是否及格：" +
                 functionalInterfaces.predicateTest(student, s -> s.getScore().compareTo(60.0) > 0));
 
-        //函数型接口
-        System.out.print("该同学基本信息：" +
-                functionalInterfaces.functionTest(student, s -> s.getName() +
-                        "&" +
-                        s.getSex() +
-                        "&" + s.getAge()));
+        // 函数型接口
+        System.out.println("该同学基本信息：" +
+                functionalInterfaces.functionTest(student, s -> s.getName() + "&" + s.getSex() + "&" + s.getAge()));
     }
 
     /**
@@ -221,12 +236,13 @@ public class Java8 {
     /**
      * 7.新增Stream管道流操作
      * <p>
+     * 此处展示少数stream中的用法，详情参见stream相关API
      * 主要用于非关系数据库数据的处理
      */
-    public void stream() {
-        // 选出性别为‘M’的学生，并将其年龄减少2岁，性别改为‘男’，最后按成绩降序排序
-        List<Student> students = Arrays.asList(
-                        new Student("CDTU-1", "小明", 'M', 19, 89.6),
+    public void streamApi() {
+        // 选出性别为‘M’的学生，并将其性别改为‘男’，最后按成绩降序排序
+        Map<Integer, Map<String, Student>> students = Arrays.asList(
+                        new Student("CDTU-1", "小明", 'M', 18, 89.6),
                         new Student("CDTU-2", "小芳", 'F', 21, 92.8),
                         new Student("CDTU-3", "小龙", 'M', 18, 97.1),
                         new Student("CDTU-4", "小红", 'F', 19, 85.4),
@@ -236,19 +252,16 @@ public class Java8 {
                         new Student("CDTU-8", "小林", 'F', 23, 91.8),
                         new Student("CDTU-9", "小王", 'M', 21, 94.2),
                         new Student("CDTU-10", "小魏", 'M', 20, 86.3))
-                // 并行流，一般比串行流stream()快
+                // 并行流，一般比串行流stream()快，但因为其依赖于Fork/Join框架，所以最终处理出的数据并不是和原数据顺序保持一致
                 .parallelStream()
                 // 过滤出sex为M的数据
                 .filter(s -> s.getSex() == 'M')
                 // 修改数据
-                .peek(s -> {
-                    s.setAge(s.getAge() - 2);
-                    s.setSex('男');
-                })
+                .peek(s -> s.setSex('男'))
                 // 排序
                 .sorted(Comparator.comparing(Student::getScore).reversed())
                 // 转成List集合
-                .collect(Collectors.toList());
+                .collect(Collectors.groupingBy(Student::getAge, Collectors.toMap(Student::getName, Function.identity(), (s1, s2) -> s2, LinkedHashMap::new)));
 
         System.out.println(students);
     }
@@ -259,12 +272,17 @@ public class Java8 {
      * 用于避免臭名昭著的空指针异常
      */
     public void optionalClass() {
-        Student studentIn = null;
-        Student studentOut = Optional
-                .ofNullable(studentIn)
+        Student studentIn = new Student("123456", "小明", 'M', 18, 65.74);
+        Student studentOut = Optional.of(studentIn)
+                // .filter(s -> s.getAge() > 10)
+                .filter(s -> s.getAge() > 20)
+                .map(s -> {
+                    s.setScore(100.0);
+                    return s;
+                })
                 .orElse(new Student("Undefined", "Unknown", 'U', -1, 0.0));
 
-        System.out.println(studentOut.getName());
+        System.out.println(studentOut);
     }
 
     /**
@@ -297,13 +315,13 @@ public class Java8 {
         LocalTime localTime = LocalTime.now();
         System.out.println("LocalTime：" + localTime);
 
-        LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
+        LocalDateTime localDateTime = LocalDateTime.now();
         System.out.println("LocalDateTime：" + localDateTime);
 
         ZonedDateTime zonedDateTime = ZonedDateTime.now();
         System.out.println("ZonedDateTime：" + zonedDateTime);
 
-        ZoneId zoneId = zonedDateTime.getZone();
+        ZoneId zoneId = ZoneId.systemDefault();
         System.out.println("ZoneId：" + zoneId);
 
         Clock clock = Clock.systemDefaultZone();
@@ -314,16 +332,63 @@ public class Java8 {
      * 10.Base64编码成为Java类库的标准
      */
     public void base64() {
-
-        String string = "我是一串小小的、可爱的 Java 字符串";
-        System.out.println("原字串：" + string);
+        String srcString = "我是一串小小的、可爱的 Java 字符串";
+        System.out.println("原字串：" + srcString);
 
         Base64.Encoder encoder = Base64.getEncoder();
-        string = encoder.encodeToString(string.getBytes(StandardCharsets.UTF_8));
-        System.out.println("编码字串：" + string);
+        String encodeString = encoder.encodeToString(srcString.getBytes(StandardCharsets.UTF_8));
+        System.out.println("编码字串：" + encodeString);
 
         Base64.Decoder decoder = Base64.getDecoder();
-        byte[] bytes = decoder.decode(string);
-        System.out.println("解密字串：" + new String(bytes));
+        String decodeString = new String(decoder.decode(encodeString), StandardCharsets.UTF_8);
+        System.out.println("解密字串：" + decodeString);
+    }
+
+    /**
+     * 11.新增Nashorn JavaScript引擎（取代Rhino JavaScript引擎）
+     * <p>
+     * 也可以通过[jjs func.js]命令接受js源码并执行
+     */
+    public void nashorn() throws ScriptException {
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine engine = manager.getEngineByName("JavaScript");
+        System.out.println(engine.getClass().getName());
+        System.out.println("Result: " + engine.eval("function f() { return 1; }; f() + 1;"));
+    }
+
+    /**
+     * 12.新增@Repeatable定义重复注解
+     */
+    @Description("描述1")
+    @Description("描述2")
+    public void repeatableAnnotation() {
+        String description = Optional.ofNullable(this.getClass())
+                .map(c -> {
+                    try {
+                        return c.getDeclaredMethod("repeatableAnnotation");
+                    } catch (NoSuchMethodException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .map(m -> m.getAnnotationsByType(Description.class))
+                .map(Arrays::stream)
+                .orElse(Stream.empty())
+                .map(Description::value)
+                .collect(Collectors.joining("，"));
+        System.out.println("描述：" + description);
+    }
+
+    /**
+     * 13.提供了对数组的并行操作
+     */
+    public void parallelArray() {
+        double[] nums = new double[100];
+        System.out.println("初始化后：" + Arrays.toString(nums));
+        Arrays.parallelSetAll(nums, operand -> Math.random() * operand);
+        System.out.println("内容填充后：" + Arrays.toString(nums));
+        Arrays.parallelPrefix(nums, ((left, right) -> Math.random() * (right - left)));
+        System.out.println("内容处理后：" + Arrays.toString(nums));
+        Arrays.parallelSort(nums);
+        System.out.println("排序后：" + Arrays.toString(nums));
     }
 }
