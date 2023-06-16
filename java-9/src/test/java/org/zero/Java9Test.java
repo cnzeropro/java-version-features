@@ -2,6 +2,8 @@ package org.zero;
 
 import org.junit.Test;
 
+import java.io.IOException;
+
 public class Java9Test {
     Java9 java9 = new Java9();
 
@@ -28,5 +30,25 @@ public class Java9Test {
     @Test
     public void streamApi() {
         java9.streamApi();
+    }
+
+    @Test
+    public void deprecatedAnnotation() {
+        java9.deprecatedAnnotation();
+    }
+
+    @Test
+    public void optionalApi() {
+        java9.optionalApi();
+    }
+
+    @Test
+    public void processApi() throws IOException {
+        java9.processApi();
+    }
+
+    @Test
+    public void completableFutureApi() {
+        java9.completableFutureApi();
     }
 }

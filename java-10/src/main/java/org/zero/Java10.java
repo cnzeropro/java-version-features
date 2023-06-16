@@ -11,6 +11,16 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * java 10 新特性
+ * <p>
+ * 1.【new】局部变量类型推断：var关键字
+ * <p>
+ * 2.【update】集合类新增copyOf方法
+ * <p>
+ * 3.【update】重载java.io.ByteArrayOutputStream#toString()方法
+ * <p>
+ * 4.【delete】删除 javah 工具，使用 javac -h 代替
+ *
  * @author Zero
  */
 public class Java10 {
@@ -67,7 +77,7 @@ public class Java10 {
         var map = Map.of("1", "first", "2", "second", "3", "third");
         var resultMap = Map.copyOf(map);
 
-        //抛出 UnsupportedOperationException
+        // 抛出 UnsupportedOperationException
 //        resultList.add("aaa");
 
 
@@ -83,18 +93,19 @@ public class Java10 {
      * 以前是默认没有参数，现在加了一个可设定编码字符方法。
      */
     public void toStringMethod() {
-        String str = "I Love Java";
+        var str = "I love Java!";
 
-        ByteArrayInputStream bais = new ByteArrayInputStream(str.getBytes(StandardCharsets.ISO_8859_1));
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        var bais = new ByteArrayInputStream(str.getBytes(StandardCharsets.ISO_8859_1));
+        var baos = new ByteArrayOutputStream();
         try (bais; baos) {
-            byte[] bytes = new byte[1024];
-            while (bais.read(bytes) != -1) {
-                baos.write(bytes);
+            var bytes = new byte[1024];
+            int len;
+            while ((len = bais.read(bytes)) != -1) {
+                baos.write(bytes, 0, len);
             }
 
-            // toString() 默认的使用的UTF-8编码，也可设定编码字符
-            System.out.println(baos.toString(StandardCharsets.ISO_8859_1));
+            var s = baos.toString(StandardCharsets.ISO_8859_1);
+            System.out.println(s);
         } catch (Exception e) {
             e.printStackTrace();
         }

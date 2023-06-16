@@ -59,7 +59,7 @@ import java.util.stream.Stream;
  * <p>
  * 15.【new】类依赖分析工具：jdeps
  * <p>
- * 16.【update】JVM内存永久代（Permgen）已经被元空间（Metaspace）替换（JEP 122）。
+ * 16.【update】JVM内存永久代（Permgen）已经被元空间（Metaspace）替换（JEP 122）
  * JVM参数-XX:PermSize和–XX:MaxPermSize分别被XX:MetaSpaceSize和-XX:MaxMetaspaceSize代替
  *
  * @author Zero
