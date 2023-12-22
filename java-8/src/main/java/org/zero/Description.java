@@ -14,8 +14,8 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * @author yufa.wang (yufa.wang@ronganchina.com)
- * @since 2023/6/15
+ * @author zero
+ * @since 2021/6/15
  */
 @Documented
 @Inherited

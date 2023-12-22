@@ -4,8 +4,8 @@ package org.zero;
  * @author Zero (cnzeropro@qq.com)
  * @date 2021/11/17 19:48
  */
-public sealed class Dog extends Pet permits YellowDog{
-    public Dog(String name, Integer age) {
+public final class Pig extends Pet{
+    public Pig(String name, Integer age) {
         super(name, age);
     }
 }

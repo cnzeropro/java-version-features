@@ -6,17 +6,22 @@ public class Java10Test {
     Java10 java10 = new Java10();
 
     @Test
-    public void varKeyword() {
-        java10.varKeyword();
+    public void introduceVarKeyword() {
+        java10.introduceVarKeyword();
     }
 
     @Test
-    public void copyOfMethod() {
-        java10.copyOfMethod();
+    public void addCopyOfMethod() {
+        java10.addCopyOfMethod();
     }
 
     @Test
-    public void toStringMethod() {
-        java10.toStringMethod();
+    public void overloadToStringMethod() {
+        java10.overloadToStringMethod();
+    }
+
+    @Test
+    public void addCollectorsApi() {
+        java10.addCollectorsApi();
     }
 }

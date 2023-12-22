@@ -1,9 +1,8 @@
 package org.zero;
 
 /**
- * 函数式接口(Functional Interface)
- * 有且仅有一个抽象方法，但是可以有多个非抽象方法。
- * 用FunctionalInterface注解标明
+ * 函数式接口(Functional Interface)有且仅有一个抽象方法，但是可以有多个非抽象方法。
+ * 可用@FunctionalInterface注解标明
  *
  * @author Zero
  */

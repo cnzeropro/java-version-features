@@ -17,9 +17,9 @@ import java.util.stream.Stream;
 /**
  * jdk9 新特性
  * <p>
- * 1.【new】接口的私有方法
+ * 1.【new】接口增加私有方法
  * <p>
- * 2.【update】钻石操作符（Diamond operator）
+ * 2.【update】钻石操作符使用升级（Diamond operator）
  * <p>
  * 3.【update】try-with-resource语句改进
  * <p>

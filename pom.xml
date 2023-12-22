@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
 
     <name>learn-java-new-features</name>
+    <description>学习 Java 新特性</description>
 
     <modules>
         <module>java-8</module>
@@ -39,7 +40,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
+            <version>1.18.26</version>
         </dependency>
     </dependencies>
 

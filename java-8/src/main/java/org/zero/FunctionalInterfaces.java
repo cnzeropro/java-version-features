@@ -13,14 +13,14 @@ import java.util.function.Supplier;
 public class FunctionalInterfaces {
     /**
      * @param supplier 供给型接口
-     * @return
+     * @return 生产的数据
      */
     public Student supplierTest(Supplier<Student> supplier) {
         return supplier.get();
     }
 
     /**
-     * @param student
+     * @param student  数据
      * @param consumer 消费型接口
      */
     public void consumerTest(Student student, Consumer<Student> consumer) {
@@ -28,18 +28,18 @@ public class FunctionalInterfaces {
     }
 
     /**
-     * @param student
+     * @param student   数据
      * @param predicate 断言型接口
-     * @return
+     * @return 断言结果
      */
     public boolean predicateTest(Student student, Predicate<Student> predicate) {
         return predicate.test(student);
     }
 
     /**
-     * @param student
+     * @param student  数据
      * @param function 函数型接口
-     * @return
+     * @return 映射结果
      */
     public String functionTest(Student student, Function<Student, String> function) {
         return function.apply(student);

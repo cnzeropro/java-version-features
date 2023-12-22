@@ -13,9 +13,7 @@
     <version>1.0.0</version>
 
     <name>java-8</name>
-
-    <dependencies>
-    </dependencies>
+    <description>学习 Java 8 新特性</description>
 
     <build>
         <plugins>

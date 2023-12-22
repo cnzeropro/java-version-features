@@ -9,68 +9,72 @@ public class Java8Test {
     Java8 java8 = new Java8();
 
     @Test
-    public void lambdaExpression() {
-        java8.lambdaExpression();
+    public void introduceLambdaExpression() {
+        java8.introduceLambdaExpression();
     }
 
     @Test
-    public void methodReference() {
-        java8.methodReference();
+    public void addMethodReference() {
+        java8.addMethodReference();
     }
 
     @Test
-    public void constructorReference() {
-        java8.constructorReference();
+    public void addConstructorReference() {
+        java8.addConstructorReference();
     }
 
     @Test
-    public void arrayReference() {
-        java8.arrayReference();
+    public void addArrayReference() {
+        java8.addArrayReference();
     }
 
     @Test
-    public void functionalInterface() {
-        java8.functionalInterface();
+    public void add4CoreFunctionalInterface() {
+        java8.add4CoreFunctionalInterface();
     }
 
     @Test
-    public void defaultAndStaticMethod() {
-        java8.defaultAndStaticMethod();
+    public void addDefaultAndStaticMethod() {
+        java8.addDefaultAndStaticMethod();
     }
 
     @Test
-    public void streamApi() {
-        java8.streamApi();
+    public void addStreamApi() {
+        java8.addStreamApi();
     }
 
     @Test
-    public void optionalClass() {
-        java8.optionalClass();
+    public void addOptionalClass() {
+        java8.addOptionalClass();
     }
 
     @Test
-    public void dateTimeApi() {
-        java8.dateTimeApi();
+    public void addDateTimeApi() {
+        java8.addDateTimeApi();
     }
 
     @Test
-    public void base64() {
-        java8.base64();
+    public void addBase64Class() {
+        java8.addBase64Class();
     }
 
     @Test
-    public void nashorn() throws ScriptException {
-        java8.nashorn();
+    public void addNashornScriptEngine() throws ScriptException {
+        java8.addNashornScriptEngine();
     }
 
     @Test
-    public void repeatableAnnotation() {
-        java8.repeatableAnnotation();
+    public void addRepeatableAnnotation() {
+        java8.addRepeatableAnnotation();
     }
 
+    @Test
+    public void addArraysApi() {
+        java8.addArraysApi();
+    }
 
     @Test
-    public void parallelArray() {
-        java8.parallelArray();
+    public void addJucClass() {
+        java8.addJucClass();
     }
 }
