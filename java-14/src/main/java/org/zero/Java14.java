@@ -1,6 +1,8 @@
 package org.zero;
 
 /**
+ * Switch表达式改进 {@link Java14#switchExpression(int)}
+ *
  * @author Zero (cnzeropro@qq.com)
  * @date 2021/11/17 17:07
  */
@@ -48,6 +50,19 @@ public class Java14 {
             case 7 -> System.out.println("星期日");
             default -> System.out.println("不存在该星期");
         }
+
+        System.out.println("新式写法：");
+        String text = switch (day) {
+            case 1 -> "星期一";
+            case 2 -> "星期二";
+            case 3 -> "星期三";
+            case 4 -> "星期四";
+            case 5 -> "星期五";
+            case 6 -> "星期六";
+            case 7 -> "星期日";
+            default -> "不存在该星期";
+        };
+        System.out.println(text);
     }
 }
 

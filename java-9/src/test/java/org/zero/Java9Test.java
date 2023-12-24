@@ -51,4 +51,9 @@ public class Java9Test {
     public void completableFutureApi() {
         java9.completableFutureApi();
     }
+
+    @Test
+    public void updateVersioningScheme() {
+        java9.updateVersioningScheme();
+    }
 }

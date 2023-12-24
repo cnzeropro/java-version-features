@@ -35,34 +35,35 @@ import java.util.stream.Stream;
 
 /**
  * jdk1.8 新特性
+ * <a href="https://www.oracle.com/java/technologies/javase/8-whats-new.html">what's new in java 8</a>
  * <p>
- * 1.【new】引入Lambda表达式
+ * 1.【new】引入Lambda表达式 {@link Java8#introduceLambdaExpression()}
  * <p>
- * 2.【new】新增方法引用
+ * 2.【new】新增方法引用 {@link Java8#addMethodReference()}
  * <p>
- * 3.【new】新增构造器引用
+ * 3.【new】新增构造器引用 {@link Java8#addConstructorReference()}
  * <p>
- * 4.【new】新增数组引用
+ * 4.【new】新增数组引用 {@link Java8#addArrayReference()}
  * <p>
- * 5.【new】新增四大内置的核心函数式接口
+ * 5.【new】新增四大内置的核心函数式接口 {@link Java8#add4CoreFunctionalInterface()}
  * <p>
- * 6.【new】接口新增默认与静态方法
+ * 6.【new】接口新增默认与静态方法 {@link Java8#addDefaultAndStaticMethod()}
  * <p>
- * 7.【new】新增Stream管道流操作
+ * 7.【new】新增Stream管道流操作 {@link Java8#addStreamApi()}
  * <p>
- * 8.【new】新增Optional容器类
+ * 8.【new】新增Optional容器类 {@link Java8#addOptionalClass()}
  * <p>
- * 9.【new】新增日期时间API（Date-Time API(JSR 310)）
+ * 9.【new】新增日期时间API（Date-Time API(JSR 310)） {@link Java8#addDateTimeApi()}
  * <p>
- * 10.【new】Base64成为Java类库的标准
+ * 10.【new】Base64成为Java类库的标准 {@link Java8#addBase64Class()}
  * <p>
- * 11.【new】增加Nashorn JavaScript引擎
+ * 11.【new】增加Nashorn JavaScript引擎 {@link Java8#addNashornScriptEngine()}
  * <p>
- * 12.【new】新增@Repeatable注解
+ * 12.【new】新增@Repeatable注解 {@link Java8#addRepeatableAnnotation()}
  * <p>
- * 13.【new】新增对数组的并行操作
+ * 13.【new】新增对数组的并行操作 {@link Java8#addArraysApi()}
  * <p>
- * 14.【new】JUC包新增并发相关的类
+ * 14.【new】JUC包新增并发相关的类 {@link Java8#addJucClass()}
  * <p>
  * 15.【new】新增类依赖分析工具：jdeps
  * <p>

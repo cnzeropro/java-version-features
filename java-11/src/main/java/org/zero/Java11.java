@@ -1,8 +1,10 @@
 package org.zero;
 
 import lombok.NonNull;
+import lombok.val;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -18,13 +20,13 @@ import java.util.stream.Stream;
 /**
  * java 11 新特性
  * <p>
- * 1.【update】可在 Lambda 中使用 var
+ * 1.【update】可在 Lambda 中使用 var {@link Java11#lambdaWithVar()}
  * <p>
- * 2.【update】新增一系列字符串处理方法
+ * 2.【update】新增一系列字符串处理方法 {@link Java11#stringApi()}
  * <p>
  * 3.【update】java文件直接运行。11以前，需要先编译生成class文件之后再运行，现在可以通过 java xxx.java 命令直接运行
  * <p>
- * 4.【new】HTTP Client 模块
+ * 4.【new】HTTP Client 模块 {@link Java11#httpClientModule()}
  *
  * @author Zero
  */
@@ -35,7 +37,7 @@ public class Java11 {
      */
     public void lambdaWithVar() {
         List<String> result = Stream.of("jac", "jlb", "bdg")
-                // 不声明 var 就没有办法为输入参数添加想要的注解
+                // 不声明形参就没有办法为参数添加想要的注解，但如果是java 11以前需要指定参数的具体类型
                 .filter((@NonNull var s) -> s.startsWith("j"))
                 .filter(Predicate.not((@NonNull var s) -> s.contains("b")))
                 .collect(Collectors.toList());
@@ -62,7 +64,7 @@ public class Java11 {
      * <p>
      * 用于发送HTTP请求，在此之前，如果不用三方包的话，只能使用HttpURLConnection
      */
-    public void httpClientModule() throws Exception {
+    public void httpClientModule() throws IOException {
         // java11以前
         HttpURLConnection httpURLConnection = (HttpURLConnection) URI.create("https://www.baidu.com/").toURL().openConnection();
         BufferedReader reader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(), StandardCharsets.UTF_8));
@@ -73,10 +75,11 @@ public class Java11 {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://www.baidu.com/"))
                 .build();
-        HttpClient.newHttpClient()
-                .sendAsync(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8))
-                .thenApply(HttpResponse::body)
-                .thenAccept(System.out::println)
-                .join();
+        try (val client = HttpClient.newHttpClient()) {
+            client.sendAsync(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8))
+                    .thenApply(HttpResponse::body)
+                    .thenAccept(System.out::println)
+                    .join();
+        }
     }
 }

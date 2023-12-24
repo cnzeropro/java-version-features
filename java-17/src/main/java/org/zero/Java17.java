@@ -4,9 +4,9 @@ import java.util.HexFormat;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * 1、【new】新增sealed（密封）类
+ * 1、【new】新增sealed（密封）类 {@link Java17#addSealedClass()}
  * <p>
- * 2、【new】增加HexFormat类
+ * 2、【new】增加HexFormat类 {@link Java17#addHexFormatClass()}
  */
 public class Java17 {
     /**

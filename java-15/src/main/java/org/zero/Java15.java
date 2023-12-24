@@ -1,6 +1,8 @@
 package org.zero;
 
 /**
+ * 引入文本块 {@link Java15#textBlock()}
+ *
  * @author Zero (cnzeropro@qq.com)
  * @date 2021/11/17 19:28
  */
@@ -36,7 +38,7 @@ public class Java15 {
                         <h1>TEST</h1>
                     </body>
                 </html>
-                   """;
+                """;
         System.out.println("文本块写法：\n" + str2);
     }
 }

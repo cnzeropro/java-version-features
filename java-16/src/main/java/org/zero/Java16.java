@@ -1,6 +1,10 @@
 package org.zero;
 
 /**
+ * 新增record类 {@link Java16#record()}
+ * <p>
+ * instanceof关键字升级 {@link Java16#instanceofKeyword()}
+ *
  * @author Zero (cnzeropro@qq.com)
  * @date 2021/11/17 19:19
  */

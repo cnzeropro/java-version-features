@@ -16,15 +16,15 @@ import java.util.stream.Stream;
 /**
  * java 10 新特性
  * <p>
- * 1.【new】局部变量类型推断：var关键字
+ * 1.【new】局部变量类型推断：var关键字 {@link Java10#introduceVarKeyword()}
  * <p>
- * 2.【new】集合类新增copyOf方法
+ * 2.【new】集合类新增copyOf方法 {@link Java10#addCopyOfMethod()}
  * <p>
- * 3.【new】重载java.io.ByteArrayOutputStream#toString()方法，新增toString(Charset)
+ * 3.【new】重载java.io.ByteArrayOutputStream#toString()方法，新增toString(Charset) {@link Java10#overloadToStringMethod()}
  * <p>
  * 4.【delete】删除javah工具，使用<code>javac -h</code>代替
  * <p>
- * 5.【new】新增Collectors（收集器）部分API
+ * 5.【new】新增Collectors（收集器）部分API {@link Java10#addCollectorsApi()}
  *
  * @author Zero
  */
