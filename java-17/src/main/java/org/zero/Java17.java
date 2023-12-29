@@ -4,9 +4,16 @@ import java.util.HexFormat;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * 1、【new】新增sealed（密封）类 {@link Java17#addSealedClass()}
- * <p>
- * 2、【new】增加HexFormat类 {@link Java17#addHexFormatClass()}
+ * <a href="https://docs.oracle.com/javase/17/index.html">JDK 17 Documentation</a>
+ * <h2>Language Changes</h2>
+ * <ol>
+ *     <li>【new】新增 sealed（密封）类。{@link Java17#addSealedClasses()}</li>
+ *     <li>【update】增强 switch 表达式。（首次预览） </li>
+ * </ol>
+ * <h2>Changes</h2>
+ * <ol>
+ *     <li>【new】增加 HexFormat 类。{@link Java17#addHexFormatClass()}</li>
+ * </ol>
  */
 public class Java17 {
     /**
@@ -18,7 +25,7 @@ public class Java17 {
      * 2、传递密封性（sealed）。
      * 3、显式放弃密封性（non-sealed），此状态下需要由下游调用方承担打破密封的风险。
      */
-    public void addSealedClass() {
+    public void addSealedClasses() {
         Pet cat = new Cat("喵喵", 3);
         cat.sleep();
         Pet blackCat = new BlackCat("妙妙", 5);

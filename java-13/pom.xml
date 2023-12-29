@@ -10,12 +10,9 @@
     </parent>
 
     <artifactId>java-13</artifactId>
-    <version>1.0.0</version>
 
     <name>java-13</name>
-
-    <dependencies>
-    </dependencies>
+    <description>学习 Java 13 新特性</description>
 
     <build>
         <plugins>

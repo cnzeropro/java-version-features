@@ -10,12 +10,9 @@
     </parent>
 
     <artifactId>java-15</artifactId>
-    <version>1.0.0</version>
 
     <name>java-15</name>
-
-    <dependencies>
-    </dependencies>
+    <description>学习 Java 15 新特性</description>
 
     <build>
         <plugins>

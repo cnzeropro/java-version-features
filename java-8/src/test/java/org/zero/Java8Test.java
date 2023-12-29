@@ -77,4 +77,41 @@ public class Java8Test {
     public void addJucClass() {
         java8.addJucClass();
     }
+
+    @Test
+    public void improveTypeInference() {
+        java8.improveTypeInference();
+    }
+
+    /**
+     * Method under test: {@link Java8#introduceTypeAnnotation()}
+     */
+    @Test
+    public void testIntroduceTypeAnnotation() {
+        java8.introduceTypeAnnotation();
+    }
+
+    /**
+     * Method under test: {@link Java8#addMethodParameterReflection()}
+     */
+    @Test
+    public void testAddMethodParameterReflection() {
+        java8.addMethodParameterReflection();
+    }
+
+    /**
+     * Method under test: {@link Java8#improveHashMaps()}
+     */
+    @Test
+    public void testImproveHashMaps() {
+        java8.improveHashMaps();
+    }
+
+    /**
+     * Method under test: {@link Java8#supportUnsignedArithmetic()}
+     */
+    @Test
+    public void testSupportUnsignedArithmetic() {
+        java8.supportUnsignedArithmetic();
+    }
 }

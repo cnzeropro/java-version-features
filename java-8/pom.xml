@@ -10,7 +10,6 @@
     </parent>
 
     <artifactId>java-8</artifactId>
-    <version>1.0.0</version>
 
     <name>java-8</name>
     <description>学习 Java 8 新特性</description>

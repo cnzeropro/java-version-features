@@ -10,12 +10,9 @@
     </parent>
 
     <artifactId>java-14</artifactId>
-    <version>1.0.0</version>
 
     <name>java-14</name>
-
-    <dependencies>
-    </dependencies>
+    <description>学习 Java 14 新特性</description>
 
     <build>
         <plugins>

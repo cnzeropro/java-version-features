@@ -10,12 +10,9 @@
     </parent>
 
     <artifactId>java-17</artifactId>
-    <version>1.0.0</version>
 
     <name>java-17</name>
-
-    <dependencies>
-    </dependencies>
+    <description>学习 Java 17 新特性</description>
 
     <build>
         <plugins>

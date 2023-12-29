@@ -10,12 +10,9 @@
     </parent>
 
     <artifactId>java-12</artifactId>
-    <version>1.0.0</version>
 
     <name>java-12</name>
-
-    <dependencies>
-    </dependencies>
+    <description>学习 Java 12 新特性</description>
 
     <build>
         <plugins>

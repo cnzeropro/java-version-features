@@ -2,6 +2,8 @@ package org.zero;
 
 import org.junit.Test;
 
+import java.nio.charset.Charset;
+
 /**
  * @author Zero (cnzeropro@qq.com)
  * @date 2022/11/10
@@ -11,7 +13,8 @@ public class Java17Test {
 
     @Test
     public void addSealedClass() {
-        java17.addSealedClass();
+        Charset charset = Charset.defaultCharset();
+        System.out.println(charset);
     }
 
     @Test

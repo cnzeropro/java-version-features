@@ -8,48 +8,48 @@ public class Java9Test {
     Java9 java9 = new Java9();
 
     @Test
-    public void privateMethod() {
-        java9.privateMethod();
+    public void addPrivateMethod() {
+        java9.addPrivateMethodInInterface();
     }
 
     @Test
     public void diamondOperator() {
-        java9.diamondOperator();
+        java9.upgradeDiamondOperator();
     }
 
     @Test
     public void tryBlock() {
-        java9.tryBlock();
+        java9.improveTryWithResourcesStatement();
     }
 
     @Test
     public void ofMethod() {
-        java9.ofMethod();
+        java9.addOfMethod();
     }
 
     @Test
     public void streamApi() {
-        java9.streamApi();
+        java9.enhanceStreamApi();
     }
 
     @Test
     public void deprecatedAnnotation() {
-        java9.deprecatedAnnotation();
+        java9.improveDeprecatedAnnotation();
     }
 
     @Test
     public void optionalApi() {
-        java9.optionalApi();
+        java9.enhanceOptionalApi();
     }
 
     @Test
     public void processApi() throws IOException {
-        java9.processApi();
+        java9.enhanceProcessApi();
     }
 
     @Test
     public void completableFutureApi() {
-        java9.completableFutureApi();
+        java9.enhanceCompletableFutureApi();
     }
 
     @Test

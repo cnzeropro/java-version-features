@@ -1,8 +1,15 @@
 package org.zero;
 
+import lombok.NonNull;
+import lombok.SneakyThrows;
+
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import java.lang.annotation.ElementType;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.time.Clock;
 import java.time.Instant;
@@ -11,17 +18,22 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.TimeZone;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.atomic.DoubleAccumulator;
 import java.util.concurrent.atomic.DoubleAdder;
 import java.util.concurrent.atomic.LongAccumulator;
@@ -34,41 +46,33 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * jdk1.8 新特性
- * <a href="https://www.oracle.com/java/technologies/javase/8-whats-new.html">what's new in java 8</a>
- * <p>
- * 1.【new】引入Lambda表达式 {@link Java8#introduceLambdaExpression()}
- * <p>
- * 2.【new】新增方法引用 {@link Java8#addMethodReference()}
- * <p>
- * 3.【new】新增构造器引用 {@link Java8#addConstructorReference()}
- * <p>
- * 4.【new】新增数组引用 {@link Java8#addArrayReference()}
- * <p>
- * 5.【new】新增四大内置的核心函数式接口 {@link Java8#add4CoreFunctionalInterface()}
- * <p>
- * 6.【new】接口新增默认与静态方法 {@link Java8#addDefaultAndStaticMethod()}
- * <p>
- * 7.【new】新增Stream管道流操作 {@link Java8#addStreamApi()}
- * <p>
- * 8.【new】新增Optional容器类 {@link Java8#addOptionalClass()}
- * <p>
- * 9.【new】新增日期时间API（Date-Time API(JSR 310)） {@link Java8#addDateTimeApi()}
- * <p>
- * 10.【new】Base64成为Java类库的标准 {@link Java8#addBase64Class()}
- * <p>
- * 11.【new】增加Nashorn JavaScript引擎 {@link Java8#addNashornScriptEngine()}
- * <p>
- * 12.【new】新增@Repeatable注解 {@link Java8#addRepeatableAnnotation()}
- * <p>
- * 13.【new】新增对数组的并行操作 {@link Java8#addArraysApi()}
- * <p>
- * 14.【new】JUC包新增并发相关的类 {@link Java8#addJucClass()}
- * <p>
- * 15.【new】新增类依赖分析工具：jdeps
- * <p>
- * 16.【update】JVM内存永久代（Permgen）已经被元空间（Metaspace）替换（JEP 122）
- * <p>JVM参数-XX:PermSize和–XX:MaxPermSize分别被XX:MetaSpaceSize和-XX:MaxMetaspaceSize代替
+ * <a href="https://docs.oracle.com/javase/8/docs/">Java Platform Standard Edition 8 Documentation</a>
+ * <h2>What's New in JDK 8</h2>
+ * <ol>
+ *     <li>【new】引入Lambda表达式。{@link Java8#introduceLambdaExpression()}</li>
+ *     <li>【new】新增方法引用。{@link Java8#addMethodReference()}</li>
+ *     <li>【new】新增构造器引用。{@link Java8#addConstructorReference()}</li>
+ *     <li>【new】新增数组引用。{@link Java8#addArrayReference()}</li>
+ *     <li>【new】新增四大内置的核心函数式接口。{@link Java8#add4CoreFunctionalInterface()}</li>
+ *     <li>【new】接口新增默认与静态方法。{@link Java8#addDefaultAndStaticMethod()}</li>
+ *     <li>【new】新增Stream管道流操作。{@link Java8#addStreamApi()}</li>
+ *     <li>【new】新增Optional容器类。{@link Java8#addOptionalClass()}</li>
+ *     <li>【new】支持无符号算术。{@link Java8#supportUnsignedArithmetic()}</li>
+ *     <li>【update】改进类型推断。{@link Java8#improveTypeInference()}</li>
+ *     <li>【new】引入类型批注。{@link Java8#introduceTypeAnnotation()}</li>
+ *     <li>【new】新增方法参数反射。{@link Java8#addMethodParameterReflection()}</li>
+ *     <li>【new】新增日期时间API（Date-Time API(JSR 310)）。{@link Java8#addDateTimeApi()}</li>
+ *     <li>【update】改善HashMap相关性能。{@link Java8#improveHashMaps()}</li>
+ *     <li>【new】JUC包新增并发相关的类。{@link Java8#addJucClass()}</li>
+ *     <li>【new】新增@Repeatable注解。{@link Java8#addRepeatableAnnotation()}</li>
+ *     <li>【new】新增对数组的并行操作。{@link Java8#addArraysApi()}</li>
+ *     <li>【new】Base64成为Java类库的标准。{@link Java8#addBase64Class()}</li>
+ *     <li>【new】增加Nashorn JavaScript引擎。{@link Java8#addNashornScriptEngine()}</li>
+ *     <li>【new】新增类依赖分析工具：jdeps。</li>
+ *     <li>【remove】移除JDBC-ODBC。</li>
+ *     <li>【update】JVM内存永久代（Permgen）已经被元空间（Metaspace）替换（JEP 122）。
+ *     JVM参数-XX:PermSize和–XX:MaxPermSize分别被XX:MetaSpaceSize和-XX:MaxMetaspaceSize代替。</li>
+ * </ol>
  *
  * @author Zero
  */
@@ -243,6 +247,7 @@ public class Java8 {
      * 新增Stream管道流操作
      * <p>
      * 此处展示少数stream中的用法，详情参见{@link Stream}相关API。
+     * <p>
      * 作用：主要用于集合数据的处理
      */
     public void addStreamApi() {
@@ -357,18 +362,21 @@ public class Java8 {
     }
 
     /**
-     * 新增@Repeatable注解，可用于定义重复注解
+     * 新增@Repeatable注解
+     * <p>
+     * 可用于定义重复注解
      */
     @Description("描述1")
     @Description("描述2")
     public void addRepeatableAnnotation() {
-        String description = Optional.ofNullable(this.getClass())
+        String description = Optional.of(this.getClass())
                 .map(c -> {
                     try {
                         return c.getDeclaredMethod("addRepeatableAnnotation");
                     } catch (NoSuchMethodException e) {
-                        throw new RuntimeException(e);
+                        e.printStackTrace();
                     }
+                    return null;
                 })
                 .map(m -> m.getAnnotationsByType(Description.class))
                 .map(Arrays::stream)
@@ -395,7 +403,9 @@ public class Java8 {
     }
 
     /**
-     * JUC包新增相关类用于多线程与并发增强
+     * JUC包新增相关类
+     * <p>
+     * 用于多线程与并发增强
      */
     public void addJucClass() {
         LongAdder longAdder = new LongAdder();
@@ -415,5 +425,94 @@ public class Java8 {
         System.out.println(completableFuture.join());
 
         StampedLock stampedLock = new StampedLock();
+
+        ConcurrentHashMap<String, Object> concurrentHashMap = new ConcurrentHashMap<>();
+        ConcurrentSkipListMap<String, Object> concurrentSkipListMap = new ConcurrentSkipListMap<>();
+
+        ForkJoinPool forkJoinPool = ForkJoinPool.commonPool();
+    }
+
+    /**
+     * 改进类型推断
+     * <p>
+     * 在 java 8 中，无需显式声明参数类型
+     */
+    public void improveTypeInference() {
+        List<String> list = new ArrayList<>();
+
+        // 以前写法（必须指定类型）
+        list.addAll(Arrays.<String>asList("Apple", "Orange"));
+
+        // 现在写法（无需指定）
+        list.addAll(Arrays.asList("Banana", "Pear"));
+
+        System.out.println("Fruit: " + list);
+    }
+
+    /**
+     * 引入类型批注
+     * <p>
+     * 在 java 8 中，可将注解应用于任何使用类型的位置的功能，而不仅仅是在声明上。此功能与可插入类型系统一起使用，可以改进代码的类型检查。
+     * 只有使用了 @Target({@link ElementType#TYPE_USE}) 的注解，才能应用到其他位置.
+     */
+    public void introduceTypeAnnotation() {
+        List<@NonNull String> list0 = new ArrayList<>();
+        ArrayList<String> list1 = (@NonNull ArrayList<String>) list0;
+        BigDecimal bigDecimal = new @Description("Big Decimal") BigDecimal("45536.55");
+    }
+
+    /**
+     * 新增方法参数反射
+     * <p>
+     * 在 Java 8 中，可以通过 java.lang.reflect.Parameter 类来访问方法的参数信息。
+     * <p>
+     * 为此还引入了一个新的编译选项 -parameters，该选项允许在编译时保留方法参数的名称信息。
+     * 如果使用了这个编译选项，那么在运行时，可以通过 Parameter.getName() 直接获取参数的实际名称，而不是默认的 arg0、arg1 等。
+     */
+    @SneakyThrows
+    public void addMethodParameterReflection() {
+        Method method = String.class.getMethod("indexOf", String.class, int.class);
+        Parameter[] parameters = method.getParameters();
+        for (Parameter parameter : parameters) {
+            System.out.println("Parameter Name: " + parameter.getName());
+            System.out.println("Parameter Type: " + parameter.getType());
+        }
+    }
+
+    /**
+     * 改善HashMap相关性能
+     * <p>
+     * Java 8 及其之后的版本在 HashMap 处理键碰撞（key collisions）方面进行了性能优化，主要引入了红黑树（Red-Black Tree）来替代链表。
+     * <p>
+     * 在哈希表中，当两个或多个键散列到同一个桶（bucket）时，发生了键碰撞。在 Java 8 之前，HashMap 使用链表来解决键碰撞。
+     * 然而，当链表长度变得很长时，查询一个特定的键的性能可能降低，因为需要遍历链表。
+     * <p>
+     * 为了解决这个问题，Java 8 引入了红黑树。当链表长度达到一定阈值（默认为8），HashMap 会将链表转换为红黑树。
+     * 红黑树在某些情况下（例如，查找、插入和删除操作）比链表更高效，尤其是在链表很长的情况下。
+     * <p>
+     * 这样一来，HashMap 在处理键碰撞时具有更好的性能，特别是对于包含大量键的哈希表。红黑树的结构使得在最坏情况下的性能保持在 O(log n) 级别。
+     * <p>
+     * 这一性能改进使得 HashMap 能够更好地应对各种负载因素和键分布的情况，提高了其在实际应用中的性能表现。
+     */
+    public void improveHashMaps() {
+        Map<String, Object> map = new HashMap<>();
+    }
+
+    /**
+     * 支持无符号算术
+     * <p>
+     * Java语言一直以来都没有提供原生的无符号整数类型，所有整数类型都是有符号的。
+     * 从Java 8 开始，提供了一些静态方法用于执行无符号整数运算。
+     * 然而这并不是引入原生的无符号整数类型，而是通过方法调用来模拟无符号运算。
+     */
+    public void supportUnsignedArithmetic() {
+        int i = Integer.divideUnsigned(10, 3);
+        System.out.println("Integer.divideUnsigned: " + i);
+        long l = Long.remainderUnsigned(4365346, 56656);
+        System.out.println("Long.remainderUnsigned: " + l);
+        int i1 = Byte.toUnsignedInt((byte) 1);
+        System.out.println("Byte.toUnsignedInt: " + i1);
+        long l1 = Short.toUnsignedLong((short) 10);
+        System.out.println("Short.toUnsignedLong: " + l1);
     }
 }

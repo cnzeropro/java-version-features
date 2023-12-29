@@ -10,12 +10,9 @@
     </parent>
 
     <artifactId>java-16</artifactId>
-    <version>1.0.0</version>
 
     <name>java-16</name>
-
-    <dependencies>
-    </dependencies>
+    <description>学习 Java 16 新特性</description>
 
     <build>
         <plugins>

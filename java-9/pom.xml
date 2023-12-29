@@ -10,10 +10,9 @@
     </parent>
 
     <artifactId>java-9</artifactId>
-    <version>1.0.0</version>
 
     <name>java-9</name>
-    <description>学习 Java 8 新特性</description>
+    <description>学习 Java 9 新特性</description>
 
     <build>
         <plugins>

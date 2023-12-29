@@ -11,6 +11,7 @@ import static java.lang.annotation.ElementType.CONSTRUCTOR;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.ElementType.TYPE_USE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
@@ -20,7 +21,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @Inherited
 @Retention(RUNTIME)
-@Target({TYPE, FIELD, CONSTRUCTOR, METHOD, ANNOTATION_TYPE})
+@Target({TYPE, FIELD, CONSTRUCTOR, METHOD, ANNOTATION_TYPE, TYPE_USE})
 @Repeatable(Descriptions.class)
 public @interface Description {
     String value() default "";
