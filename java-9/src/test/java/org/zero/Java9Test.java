@@ -8,6 +8,11 @@ public class Java9Test {
     Java9 java9 = new Java9();
 
     @Test
+    public void updateVersioningScheme() {
+        java9.updateVersioningScheme();
+    }
+
+    @Test
     public void addPrivateMethod() {
         java9.addPrivateMethodInInterface();
     }
@@ -38,6 +43,11 @@ public class Java9Test {
     }
 
     @Test
+    public void introduceDeprecationWarning() {
+        java9.introduceDeprecationWarning();
+    }
+
+    @Test
     public void optionalApi() {
         java9.enhanceOptionalApi();
     }
@@ -53,7 +63,7 @@ public class Java9Test {
     }
 
     @Test
-    public void updateVersioningScheme() {
-        java9.updateVersioningScheme();
+    public void enhanceSafeVarargsAnnotation() {
+        java9.enhanceSafeVarargsAnnotation();
     }
 }

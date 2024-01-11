@@ -5,14 +5,18 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * @author Zero (cnzeropro@qq.com)
- * @date 2022/11/10
+ * @author zero
  */
 public class Java14Test {
     Java14 java14 = new Java14();
 
     @Test
-    public void switchExpression() {
-        java14.switchExpression(5);
+    public void improveSwitchExpression() {
+        java14.improveSwitchExpression();
+    }
+
+    @Test
+    public void supportAccountingCurrencyFormat() {
+        java14.supportAccountingCurrencyFormat();
     }
 }

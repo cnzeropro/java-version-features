@@ -5,20 +5,19 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * @author yufa.wang (yufa.wang@ronganchina.com)
- * @since 2023/12/27
+ * @author zero
  */
 public class Java11Test {
     Java11 java11 = new Java11();
 
     @Test
-    public void enhanceVarKeyWord() {
-        java11.enhanceVarKeyWord();
+    public void enhanceVarIdentifier() {
+        java11.enhanceVarIdentifier();
     }
 
     @Test
-    public void addStringMethod() {
-        java11.addStringMethod();
+    public void addMethodsForString() {
+        java11.addMethodsForString();
     }
 
     @Test

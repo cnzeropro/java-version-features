@@ -11,20 +11,29 @@ import java.util.Objects;
 import java.util.TreeMap;
 
 /**
- * <a href="https://docs.oracle.com/javase/15/index.html">JDK 15 Documentation</a>
- * <h2>Language Changes</h2>
+ * <a href="https://docs.oracle.com/javase/15">JDK 15 Documentation</a>
+ * <h2>Language Features</h2>
  * <ol>
- *     <li>【new】引入文本块。{@link Java15#introduceTextBlock()}</li>
- *     <li>【update】增强 instanceof 关键字。（预览）</li>
- *     <li>【new】新增记录类。（预览）</li>
- *     <li>【new】新增密封类。（预览）</li>
+ *     <li>【new】文本块（Text Blocks）{@link Java15#introduceTextBlock()}</li>
  * </ol>
+ *
+ * <h2>Previews and Incubator</h2>
+ * <ol>
+ *     <li>【update】instanceof 模式匹配（Pattern Matching for instanceof）（第二次预览）</li>
+ *     <li>【new】记录类（Record Classes）（第二次预览）</li>
+ *     <li>【new】密封类（Sealed Classes）（首次预览）</li>
+ * </ol>
+ *
+ * <h2>Libraries Improvements</h2>
+ * <ol>
+ *     <li>【new】隐式类（Hidden Classes）{@link Java15#introduceHiddenClasses()}</li>
+ *     <li>【new】CharSequence 类新增 isEmpty 方法（Added isEmpty Default Method to CharSequence）{@link Java15#addMethodForCharSequence()}</li>
+ *     <li>【new】重写 TreeMap 方法并改进性能（Specialized Implementations of TreeMap Methods）{@link Java15#overrideTreeMapMethod()}</li>
+ * </ol>
+ *
  * <h2>Changes</h2>
  * <ol>
- *     <li>【update】支持 Unicode 13.0。</li>
- *     <li>【new】新增 CharSequence 类方法。{@link Java15#addCharSequenceMethod()}</li>
- *     <li>【new】引入隐式类。{@link Java15#introduceHiddenClasses()}</li>
- *     <li>【new】重写 TreeMap 方法并改进性能。{@link Java15#overrideTreeMapMethod()}</li>
+ *     <li>【update】支持 Unicode 13.0（Support for Unicode 13.0）</li>
  * </ol>
  *
  * @author Zero (cnzeropro@qq.com)
@@ -35,7 +44,7 @@ public class Java15 {
     /**
      * 引入文本块写法
      * <p>
-     * 解决 xml、json 等语法书写难以排版的问题
+     * 主要用于解决 xml、json 等语法书写难以排版的问题
      */
     public void introduceTextBlock() {
         // 传统写法
@@ -67,7 +76,7 @@ public class Java15 {
         System.out.println("文本块写法：\n" + str2);
     }
 
-    public void addCharSequenceMethod() {
+    public void addMethodForCharSequence() {
         CharSequence charSequence = "";
         System.out.println("CharSequence is empty: " + charSequence.isEmpty());
     }
@@ -101,7 +110,7 @@ public class Java15 {
         System.out.println("调用sayHello方法：");
         MethodHandle methodHandle = MethodHandles.lookup()
                 .findStatic(proxyClass, "sayHello", MethodType.methodType(int.class, String.class));
-        Object result = methodHandle.invokeExact("Bob");
+        int result = (int) methodHandle.invokeExact("Bob");
         System.out.println("len: " + result);
     }
 
@@ -111,6 +120,10 @@ public class Java15 {
      * TreeMap 类现在提供了 putIfAbsent、computeIfAbsent、computeIfPresent、compute 和 merge 方法的重写实现并为新的实现提供了性能改进。
      */
     public void overrideTreeMapMethod() {
-        TreeMap<String, Object> treeMap = new TreeMap<>();
+        var treeMap = new TreeMap<String, Object>();
+        treeMap.putIfAbsent("a", 12);
+        treeMap.putIfAbsent("c", 28);
+        treeMap.putIfAbsent("b", 5);
+        System.out.println(treeMap);
     }
 }

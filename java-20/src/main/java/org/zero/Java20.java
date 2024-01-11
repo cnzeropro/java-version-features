@@ -1,22 +1,33 @@
 package org.zero;
 
 /**
- * <a href="https://docs.oracle.com/javase/20/index.html">JDK 20 Documentation</a>
- * <h2>Language Changes</h2>
+ * <a href="https://docs.oracle.com/javase/20">JDK 20 Documentation</a>
+ * <h2>Language Features</h2>
  * <ol>
- *     <li>【update】增强 switch 表达式。（第四次预览）</li>
- *     <li>【update】增强 record 类在 instanceof 中的使用。（第二次预览）</li>
- * </ol>
- * <h2>Changes</h2>
- * <ol>
- *     <li>【update】支持 GB18030-2022。
- *     这个新标准的字符集现在已经取代了以前的2000标准。但是，却与之前的实现有一些不兼容的变化。
- *     对于那些需要使用旧映射字符集的用户，引入了新的系统属性 jdk.charset.GB18030。
- *     通过将其值设置为2000，GB18030 Charset 将使用以前的 JDK 版本的映射。</li>
  * </ol>
  *
- * @author @author Zero
- * @since 2018/12/25
+ * <h2>Previews and Incubator</h2>
+ * <ol>
+ *     <li>【update】switch 模式匹配（Pattern Matching for switch Expressions and Statements）（第四次预览）</li>
+ *     <li>【update】记录模式（Record Patterns）（第二次预览）</li>
+ *     <li>【new】虚拟线程（Virtual Threads）（第二次预览）</li>
+ *     <li>【new】作用域值（Scoped Values）（首次孵化）</li>
+ *     <li>【new】结构化并发（Structured Concurrency）（第二次孵化）</li>
+ *     <li>【new】外部函数和内存API（Foreign Function & Memory API）（第二次预览）</li>
+ *     <li>【new】向量 API（Vector API）（第五次孵化）</li>
+ * </ol>
+ *
+ * <h2>Libraries Improvements</h2>
+ * <ol>
+ * </ol>
+ *
+ * <h2>Changes</h2>
+ * <ol>
+ *     <li>【update】支持 Unicode 15.0（Support Unicode 15.0）</li>
+ * </ol>
+ *
+ * @author Zero
+ * @since 2023/8/25
  */
 public class Java20 {
 

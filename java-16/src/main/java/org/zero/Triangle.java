@@ -3,15 +3,15 @@ package org.zero;
 import java.util.Objects;
 
 public class Triangle {
-    private double a;
-    private double b;
-    private double c;
+    protected double a;
+    protected double b;
+    protected double c;
 
     public Triangle(double a, double b, double c) {
         this.a = a;
         this.b = b;
         this.c = c;
-        init();
+        this.init();
     }
 
     private void init() {
@@ -65,10 +65,10 @@ public class Triangle {
 
     @Override
     public String toString() {
-        return "Triangle{" +
+        return "Triangle[" +
                 "a=" + a +
                 ", b=" + b +
                 ", c=" + c +
-                '}';
+                ']';
     }
 }

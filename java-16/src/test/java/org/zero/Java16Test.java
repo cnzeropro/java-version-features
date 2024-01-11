@@ -5,19 +5,23 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * @author Zero (cnzeropro@qq.com)
- * @date 2022/11/10
+ * @author zero
  */
 public class Java16Test {
     Java16 java16 = new Java16();
 
     @Test
-    public void record() {
-        java16.record();
+    public void addRecordClasses() {
+        java16.addRecordClasses();
     }
 
     @Test
-    public void instanceofKeyword() {
-        java16.instanceofKeyword();
+    public void upgradeInstanceofKeyword() {
+        java16.upgradeInstanceofKeyword();
+    }
+
+    @Test
+    public void addMethodsForStream() {
+        java16.addMethodsForStream();
     }
 }

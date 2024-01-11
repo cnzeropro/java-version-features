@@ -2,8 +2,6 @@ package org.zero;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * @author yufa.wang (yufa.wang@ronganchina.com)
  * @since 2023/12/27
@@ -12,8 +10,8 @@ public class Java10Test {
     Java10 java10 = new Java10();
 
     @Test
-    public void introduceVarKeyword() {
-        java10.introduceVarKeyword();
+    public void introduceVarIdentifier() {
+        java10.introduceVarIdentifier();
     }
 
     @Test
@@ -27,13 +25,8 @@ public class Java10Test {
     }
 
     @Test
-    public void addCopyOfMethod() {
-        java10.addCopyOfMethod();
-    }
-
-    @Test
-    public void addCollectorsApi() {
-        java10.addCollectorsApi();
+    public void addCreatingUnmodifiableCollectionsApi() {
+        java10.addCreatingUnmodifiableCollectionsApi();
     }
 
     @Test
