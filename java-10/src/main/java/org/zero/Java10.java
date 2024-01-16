@@ -147,10 +147,14 @@ public class Java10 {
     public void addCreatingUnmodifiableCollectionsApi() {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         // Collectors
-        var list = random.ints(12, 10, 100).boxed().collect(Collectors.toUnmodifiableList());
-        var set = random.ints(12, 10, 100).boxed().collect(Collectors.toUnmodifiableSet());
-        var map = random.ints(12, 10, 100).boxed().collect(Collectors.toUnmodifiableMap(i -> i + "a", Function.identity()));
-        var map1 = random.ints(12, 10, 100).boxed().collect(Collectors.toUnmodifiableMap(i -> i + "a", Function.identity(), (v1, v2) -> v2));
+        var list = random.ints(12, 10, 100).boxed()
+                .collect(Collectors.toUnmodifiableList());
+        var set = random.ints(12, 10, 100).boxed()
+                .collect(Collectors.toUnmodifiableSet());
+        var map = random.ints(12, 10, 100).boxed()
+                .collect(Collectors.toUnmodifiableMap(i -> i + "a", Function.identity()));
+        var map1 = random.ints(12, 10, 100).boxed()
+                .collect(Collectors.toUnmodifiableMap(i -> i + "a", Function.identity(), (v1, v2) -> v2));
         System.out.println("list: " + list);
         System.out.println("set: " + set);
         System.out.println("map: " + map);

@@ -134,7 +134,7 @@ public class Java11 {
     /**
      * 重载 toArray 方法
      * <p>
-     * Java 11 新增了java.util.Collection#toArray(java.util.function.IntFunction<T[]>)
+     * Java 11 新增了{@link java.util.Collection#toArray(java.util.function.IntFunction<T[]>)}
      */
     public void overloadToArrayMethod() {
         var list = List.of("a", "b", "c");

@@ -37,7 +37,8 @@ import java.util.Locale;
  */
 public class Java12 {
     public void addJvmConstantApi() {
-        ConstantDesc constantDesc;
+        ConstantDesc constantDesc = Integer.valueOf(123);
+        System.out.println(constantDesc);
     }
 
     public void supportCompactNumberFormatting() {

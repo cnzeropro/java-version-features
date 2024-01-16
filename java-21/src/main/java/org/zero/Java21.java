@@ -262,8 +262,10 @@ public class Java21 {
         SequencedCollection<String> sequencedCollection = List.of("a", "b", "c");
         String first = sequencedCollection.getFirst();
         String last = sequencedCollection.getLast();
+        System.out.println("first: " + first);
+        System.out.println("last: " + last);
         SequencedSet<String> sequencedSet = LinkedHashSet.newLinkedHashSet(3);
-        SequencedMap<String, Object> sequencedMap = LinkedHashMap.newLinkedHashMap(4);
+        SequencedMap<String, Object> sequencedMap = LinkedHashMap.newLinkedHashMap(6);
     }
 
     /**
@@ -298,11 +300,12 @@ public class Java21 {
     /**
      * 新增 repeat 方法
      * <p>
-     * StringBuilder 和 StringBuffer 新增 repeat 方法
+     * {@link StringBuilder}和{@link StringBuffer}新增 repeat 方法
      */
     public void addRepeatMethod() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.repeat("abc", 10);
+        StringBuilder stringBuilder = new StringBuilder()
+                .repeat('*', 5)
+                .repeat("abc", 10);
         System.out.println(stringBuilder);
     }
 }

@@ -12,6 +12,8 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -39,12 +41,12 @@ import java.util.stream.Stream;
  *
  * <h2>Changes</h2>
  * <ol>
- *     <li>【update】@Deprecated注解新增属性 {@link Java9#improveDeprecatedAnnotation()}</li>
- *     <li>【new】集合新增静态工厂方法（of()方法） {@link Java9#addOfMethod()}</li>
- *     <li>【update】Stream API增强 {@link Java9#enhanceStreamApi()}</li>
- *     <li>【update】Optional API {@link Java9#enhanceOptionalApi()}</li>
- *     <li>【update】Process API {@link Java9#enhanceProcessApi()}</li>
- *     <li>【update】CompletableFuture API {@link Java9#enhanceCompletableFutureApi()}</li>
+ *     <li>【update】@Deprecated注解新增属性。{@link Java9#improveDeprecatedAnnotation()}</li>
+ *     <li>【new】集合新增静态工厂方法：of方法。{@link Java9#addOfMethod()}</li>
+ *     <li>【update】Stream 类新增方法。{@link Java9#enhanceStreamApi()}</li>
+ *     <li>【update】Optional 类新增方法。{@link Java9#enhanceOptionalApi()}</li>
+ *     <li>【update】Process 类新增方法。{@link Java9#enhanceProcessApi()}</li>
+ *     <li>【update】CompletableFuture 类新增方法。{@link Java9#enhanceCompletableFutureApi()}</li>
  *     <li>【update】新的 JDK 版本控制方案（New Version-String Scheme）{@link Java9#updateVersioningScheme()}</li>
  *     <li>【update】默认使用 CLDR 语言环境数据（Use CLDR locale data by default）<p>
  *     在 JDK 9 中，默认区域设置数据使用派生自 Unicode 联盟的通用区域设置数据存储库 （CLDR） 的数据。
@@ -196,9 +198,15 @@ public class Java9 {
     }
 
     /**
-     * 增强 Stream API
+     * Stream 类新增方法
      * <p>
-     * Java 9 为 Stream 流新增了几个方法：dropWhile、takeWhile、ofNullable，为 iterate 方法新增了一个重载方法。
+     * 新增：
+     * {@link Stream#dropWhile}、
+     * {@link Stream#takeWhile}、
+     * {@link Stream#ofNullable}
+     * <p>
+     * 重载：
+     * {@link Stream#iterate(Object, Predicate, UnaryOperator)}
      */
     public void enhanceStreamApi() {
         // takeWhile() 方法使用一个断言作为参数，返回给定 Stream 的子集直到断言语句第一次返回 false。
@@ -252,7 +260,12 @@ public class Java9 {
     }
 
     /**
-     * Optional中新增了几个方法：or、ifPresentOrElse、stream
+     * Optional 类新增方法
+     * <p>
+     * 包括：
+     * {@link Optional#or}、
+     * {@link Optional#ifPresentOrElse}、
+     * {@link Optional#stream}
      */
     public void enhanceOptionalApi() {
         Optional.ofNullable(null)
@@ -261,7 +274,16 @@ public class Java9 {
     }
 
     /**
-     * Process中新增了几个方法：supportsNormalTermination、pid、onExit、toHandle、info、children、descendants
+     * Process 类新增方法
+     * <p>
+     * 包括：
+     * {@link Process#supportsNormalTermination}、
+     * {@link Process#pid}、
+     * {@link Process#onExit}、
+     * {@link Process#toHandle}、
+     * {@link Process#info}、
+     * {@link Process#children}、
+     * {@link Process#descendants}
      */
     public void enhanceProcessApi() throws IOException {
         ProcessBuilder processBuilder = new ProcessBuilder("ping", "localhost");
@@ -270,16 +292,26 @@ public class Java9 {
         long pid = process.pid();
         ProcessHandle.Info info = process.info();
 
-
         System.out.println("支持正常终止：" + supportsNormalTermination);
         System.out.println("pid：" + pid);
-        System.out.println("info：" + info);
+        System.out.println("进程信息快照：" + info);
     }
 
     /**
-     * CompletableFuture 类
+     * CompletableFuture 类新增方法
      * <p>
-     * CompletableFuture 中新增了几个方法：newIncompleteFuture、defaultExecutor、copy、minimalCompletionStage、completeAsync、orTimeout、completeOnTimeout、delayedExecutor、completedStage、failedFuture、failedStage
+     * CompletableFuture 中新增了几个方法：
+     * {@link CompletableFuture#newIncompleteFuture}、
+     * {@link CompletableFuture#defaultExecutor}、
+     * {@link CompletableFuture#copy}、
+     * {@link CompletableFuture#minimalCompletionStage}、
+     * {@link CompletableFuture#completeAsync}、
+     * {@link CompletableFuture#orTimeout}、
+     * {@link CompletableFuture#completeOnTimeout}、
+     * {@link CompletableFuture#delayedExecutor}、
+     * {@link CompletableFuture#completedStage}、
+     * {@link CompletableFuture#failedFuture}、
+     * {@link CompletableFuture#failedStage}
      */
     public void enhanceCompletableFutureApi() {
         CompletableFuture<Void> completableFuture = CompletableFuture.runAsync(() -> System.out.println("ok"));
