@@ -1,10 +1,10 @@
 package org.zero;
 
 /**
- * <a href="https://docs.oracle.com/javase/6/docs/technotes/guides/language/enhancements.html">Enhancements in JDK v1.4</a>
+ * <a href="http://docs.oracle.com/javase/1.4.2/docs/">Java(TM) 2 SDK Documentation</a>
  * <h2>Enhancements</h2>
  * <ol>
- *     <li>【new】断言功能。{@link Java4#addAssertionFacility()}</li>
+ *     <li>【new】断言功能（Assertion Facility）{@link Java4#addAssertionFacility()}</li>
  * </ol>
  *
  * @author @author Zero
@@ -22,7 +22,7 @@ public class Java4 {
      *     </tr>
      *     <tr>
      *         <td>assert BoolExpression:MsgExpression;</td>
-     *         <td>计算 boolean 表达式：如果为 true 正常通过断言语句，否则运行指定表达式获取字符串，并使用其构造AssertionError</td>
+     *         <td>计算 boolean 表达式：如果为 true 正常通过断言语句，否则运行指定表达式获取字符串，使用其构造 AssertionError 并抛出</td>
      *     </tr>
      * </table>
      * 默认情况下，断言在运行时处于禁用状态。通过两个命令行开关允许有选择地启用或禁用断言。
@@ -32,10 +32,12 @@ public class Java4 {
      * </ul>
      */
     public void addAssertionFacility() {
-        assert false;
+        double randomNum = Math.random();
 
-        assert false : "not true";
-
-        assert false : "is " + Boolean.FALSE;
+        assert randomNum > 0.3;
+        assert randomNum > 0.5 : "不大于0.5";
+        assert randomNum > 0.7 : new StringBuffer("Error: ").append(randomNum)
+                .append(" is less than or equal to ")
+                .append(0.7);
     }
 }

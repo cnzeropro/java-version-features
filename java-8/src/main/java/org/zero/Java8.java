@@ -49,8 +49,8 @@ import java.util.stream.Stream;
  * <a href="https://docs.oracle.com/javase/8/docs/">Java Platform Standard Edition 8 Documentation</a>
  * <h2>What's New in JDK 8</h2>
  * <ol>
- *     <li>【new】引入Lambda表达式。{@link Java8#introduceLambdaExpression()}</li>
- *     <li>【new】新增方法引用。{@link Java8#addMethodReference()}</li>
+ *     <li>【new】引入Lambda表达式（Lambda Expressions）{@link Java8#introduceLambdaExpression()}</li>
+ *     <li>【new】新增方法引用（Method References）{@link Java8#addMethodReference()}</li>
  *     <li>【new】新增构造器引用。{@link Java8#addConstructorReference()}</li>
  *     <li>【new】新增数组引用。{@link Java8#addArrayReference()}</li>
  *     <li>【new】新增四大内置的核心函数式接口。{@link Java8#add4CoreFunctionalInterface()}</li>
@@ -58,17 +58,17 @@ import java.util.stream.Stream;
  *     <li>【new】新增Stream管道流操作。{@link Java8#addStreamApi()}</li>
  *     <li>【new】新增Optional容器类。{@link Java8#addOptionalClass()}</li>
  *     <li>【new】支持无符号算术。{@link Java8#supportUnsignedArithmetic()}</li>
- *     <li>【update】改进类型推断。{@link Java8#improveTypeInference()}</li>
- *     <li>【new】引入类型批注。{@link Java8#introduceTypeAnnotation()}</li>
- *     <li>【new】新增方法参数反射。{@link Java8#addMethodParameterReflection()}</li>
+ *     <li>【update】改进类型推断（Improved type inference）{@link Java8#improveTypeInference()}</li>
+ *     <li>【new】引入类型批注（Type Annotations）{@link Java8#introduceTypeAnnotation()}</li>
+ *     <li>【new】新增方法参数反射（Method parameter reflection）{@link Java8#addMethodParameterReflection()}</li>
  *     <li>【new】新增日期时间API（Date-Time API(JSR 310)）。{@link Java8#addDateTimeApi()}</li>
  *     <li>【update】改善HashMap相关性能。{@link Java8#improveHashMaps()}</li>
  *     <li>【new】JUC包新增并发相关的类。{@link Java8#addJucClass()}</li>
- *     <li>【new】新增@Repeatable注解。{@link Java8#addRepeatableAnnotation()}</li>
+ *     <li>【new】新增@Repeatable注解（Repeating Annotations）{@link Java8#addRepeatableAnnotation()}</li>
  *     <li>【new】新增对数组的并行操作。{@link Java8#addArraysApi()}</li>
  *     <li>【new】Base64成为Java类库的标准。{@link Java8#addBase64Class()}</li>
  *     <li>【new】增加Nashorn JavaScript引擎。{@link Java8#addNashornScriptEngine()}</li>
- *     <li>【new】新增类依赖分析工具：jdeps。</li>
+ *     <li>【new】新增类依赖分析工具：jdeps（Java Dependency Analysis Tool (jdeps)）</li>
  *     <li>【remove】移除JDBC-ODBC。</li>
  *     <li>【update】JVM内存永久代（Permgen）已经被元空间（Metaspace）替换（JEP 122）。
  *     JVM参数-XX:PermSize和–XX:MaxPermSize分别被XX:MetaSpaceSize和-XX:MaxMetaspaceSize代替。</li>
@@ -453,7 +453,7 @@ public class Java8 {
      * 引入类型批注
      * <p>
      * 在 java 8 中，可将注解应用于任何使用类型的位置的功能，而不仅仅是在声明上。此功能与可插入类型系统一起使用，可以改进代码的类型检查。
-     * 只有使用了 @Target({@link ElementType#TYPE_USE}) 的注解，才能应用到其他位置.
+     * 只有使用了 @Target({@link ElementType#TYPE_USE}) 的注解，才能应用到其他位置。
      */
     public void introduceTypeAnnotation() {
         List<@NonNull String> list0 = new ArrayList<>();

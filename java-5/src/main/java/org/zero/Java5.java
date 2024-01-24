@@ -7,16 +7,16 @@ import static org.zero.Constant.SEASON_SPRING;
 import static org.zero.Constant.SEASON_WINTER;
 
 /**
- * <a href="https://docs.oracle.com/javase/6/docs/technotes/guides/language/enhancements.html">Enhancements in JDK 5</a>
+ * <a href="https://docs.oracle.com/javase/1.5.0/docs/">JDK<sup>TM</sup> 5.0 Documentation</a>
  * <h2>Enhancements</h2>
  * <ol>
- *     <li>【new】泛型。{@link Java5#addGenerics()}</li>
- *     <li>【update】增强for循环。{@link Java5#enhanceForLoop()}</li>
- *     <li>【new】自动装/拆箱。{@link Java5#addAutoBoxingAndUnboxing()}</li>
- *     <li>【new】类型安全枚举。{@link Java5#addTypesafeEnums()}</li>
- *     <li>【new】可变长参数列表。{@link Java5#addVarargs()}</li>
- *     <li>【new】静态导入。{@link Java5#addStaticImport()}</li>
- *     <li>【new】注解。{@link Java5#addAnnotations()}</li>
+ *     <li>【new】泛型（Generics）{@link Java5#addGenerics()}</li>
+ *     <li>【update】增强for循环（Enhanced for Loop）{@link Java5#enhanceForLoop()}</li>
+ *     <li>【new】自动装/拆箱（Autoboxing/Unboxing）{@link Java5#addAutoBoxingAndUnboxing()}</li>
+ *     <li>【new】类型安全枚举（Typesafe Enums）{@link Java5#addTypesafeEnums()}</li>
+ *     <li>【new】可变长参数列表（Varargs）{@link Java5#addVarargs()}</li>
+ *     <li>【new】静态导入（Static Import）{@link Java5#addStaticImport()}</li>
+ *     <li>【new】注解（Annotations）{@link Java5#addAnnotations()}</li>
  * </ol>
  *
  * @author @author Zero

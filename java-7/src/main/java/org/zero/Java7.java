@@ -14,14 +14,14 @@ import java.util.concurrent.ThreadLocalRandom;
  * <a href="https://docs.oracle.com/javase/7/docs/">Java Platform Standard Edition 7 Documentation</a>
  * <h2>Enhancements</h2>
  * <ol>
- *     <li>【new】二进制字面值。{@link Java7#addBinaryLiterals()}</li>
- *     <li>【new】数字字面量可以使用下划线。{@link Java7#addUnderscoresInNumericLiterals()}</li>
- *     <li>【update】字符串可以在 switch 语句块中使用。{@link Java7#addStringsInSwitchStatements()}</li>
- *     <li>【new】创建通用实例的类型推理。{@link Java7#addTypeInference()}</li>
- *     <li>【update】改进编译器警告和错误。{@link Java7#improveCompilerWarningsAndErrors()}</li>
- *     <li>【new】try-with-resources 语句块。{@link Java7#addTryWithResourcesStatement()}</li>
- *     <li>【update】改进捕获多个异常。{@link Java7#improveCatchingMultipleException()}</li>
- *     <li>【new】ThreadLocalRandom类。{@link Java7#addThreadLocalRandomClass()} ()}</li>
+ *     <li>【new】二进制字面值（Binary Literals）{@link Java7#addBinaryLiterals()}</li>
+ *     <li>【new】数字字面量可以使用下划线（Underscores in Numeric Literals）{@link Java7#addUnderscoresInNumericLiterals()}</li>
+ *     <li>【update】字符串可以在 switch 语句块中使用（Strings in switch Statements）{@link Java7#addStringsInSwitchStatements()}</li>
+ *     <li>【new】创建通用实例的类型推理（Type Inference for Generic Instance Creation）{@link Java7#addTypeInference()}</li>
+ *     <li>【update】改进编译器警告和错误（Improved Compiler Warnings and Errors When Using Non-Reifiable Formal Parameters with Varargs Methods）{@link Java7#improveCompilerWarningsAndErrors()}</li>
+ *     <li>【new】try-with-resources 语句块（The try-with-resources Statement）{@link Java7#addTryWithResourcesStatement()}</li>
+ *     <li>【update】改进捕获多个异常（Catching Multiple Exception Types and Rethrowing Exceptions with Improved Type Checking）{@link Java7#improveCatchingMultipleException()}</li>
+ *     <li>【new】ThreadLocalRandom类。{@link Java7#addThreadLocalRandomClass()}</li>
  * </ol>
  *
  * @author @author Zero
