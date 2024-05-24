@@ -28,9 +28,10 @@
         <module>java-19</module>
         <module>java-20</module>
         <module>java-21</module>
+        <module>java-22</module>
     </modules>
 
-    <name>learn-java-new-features</name>
+    <name>Learn Java New Features</name>
     <description>学习 Java 新特性</description>
 
     <properties>
@@ -49,7 +50,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
