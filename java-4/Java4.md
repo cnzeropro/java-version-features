@@ -4,7 +4,9 @@
 
 ## Enhancements
 
-### 1、断言功能（Assertion Facility）
+### 1、断言功能
+
+**Assertion Facility**
 
 断言是 Java 1.4 的一个语言特性，它允许程序员在运行时检查程序逻辑的正确性。断言使用`assert`关键字声明。
 

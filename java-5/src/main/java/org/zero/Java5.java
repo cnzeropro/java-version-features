@@ -14,17 +14,17 @@ public class Java5 {
     /**
      * 引入泛型
      */
-    public void addGenerics() {
-        // 以前写法
+    public void introduceGeneric() {
         System.out.println("Before:");
+        // 以前写法
         List list0 = Arrays.asList("aaa", "bbb", "ccc", "ddd");
         for (int i = 0; i < list0.size(); i++) {
             String s = (String) list0.get(i);
             System.out.println(s);
         }
 
-        // 现在写法
         System.out.println("Now:");
+        // 现在写法
         List<String> list1 = Arrays.asList("aaa", "bbb", "ccc", "ddd");
         for (int i = 0; i < list1.size(); i++) {
             String s = list1.get(i);
@@ -38,15 +38,15 @@ public class Java5 {
     public void enhanceForLoop() {
         String[] a = new String[]{"aaa", "bbb", "ccc", "ddd"};
 
+        System.out.println("Before:");
         // 以前写法
-        System.out.println("jdk 1.5 之前：");
         for (int i = 0; i < a.length; i++) {
             String s = a[i];
             System.out.println(s);
         }
 
+        System.out.println("Now:");
         // 现在写法
-        System.out.println("jdk 1.5 之后：");
         for (String s : a) {
             System.out.println(s);
         }
@@ -56,11 +56,13 @@ public class Java5 {
      * 自动装箱、拆箱
      */
     public void addAutoBoxingAndUnboxing() {
+        System.out.println("Before:");
         // 以前写法
         Integer integer = Integer.valueOf(45);
         int i = integer.intValue();
         System.out.printf("integer: %d, int: %d%n", integer, i);
 
+        System.out.println("Now:");
         // 现在写法
         Character character = 'c';
         char c = character;
@@ -70,10 +72,12 @@ public class Java5 {
     /**
      * 类型安全枚举
      */
-    public void addTypesafeEnums() {
+    public void addTypesafeEnum() {
+        System.out.println("Before:");
         // 以前写法
         System.out.println(SEASON_SPRING);
 
+        System.out.println("Now:");
         // 现在写法
         System.out.println(Season.SPRING);
     }
@@ -82,9 +86,11 @@ public class Java5 {
      * 可变长参数
      */
     public void addVarargs() {
+        System.out.println("Before:");
         // 以前的方法定义
         m0(new String[]{"aaa", "bbb"});
 
+        System.out.println("Now:");
         // 现在的方法定义
         m1("aaa", "bbb");
     }
@@ -101,9 +107,11 @@ public class Java5 {
      * 静态导入
      */
     public void addStaticImport() {
+        System.out.println("Before:");
         // 以前写法
         System.out.println(Constant.SEASON_AUTUMN);
 
+        System.out.println("Now:");
         // 现在写法
         System.out.println(SEASON_WINTER);
     }
@@ -112,7 +120,7 @@ public class Java5 {
      * 引入注解
      */
     @Deprecated
-    public void addAnnotations() {
-
+    public void introduceAnnotation() {
+        System.out.println("This method has '@Deprecated' annotation");
     }
 }

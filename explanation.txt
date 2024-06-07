@@ -1,0 +1,23 @@
+// 增加
+add
+
+// 优化
+optimize
+
+// 改进、改善
+improve
+
+// 增强
+enhance
+
+// 引入
+introduce
+
+// 支持
+support
+
+// 升级
+upgrade
+
+// 改变
+change

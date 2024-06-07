@@ -9,4 +9,8 @@ public class Constant {
     public static final int SEASON_SUMMER = 2;
     public static final int SEASON_AUTUMN = 3;
     public static final int SEASON_WINTER = 4;
+
+    private Constant() throws IllegalAccessException {
+        throw new IllegalAccessException("Instancing is not allowed");
+    }
 }
