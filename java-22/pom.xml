@@ -12,7 +12,7 @@
 
     <artifactId>java-22</artifactId>
 
-    <name>java-22</name>
+    <name>java 22</name>
     <description>学习 Java 22 新特性</description>
 
     <build>
@@ -21,11 +21,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
+                    <release>22</release>
                     <source>22</source>
                     <target>22</target>
-                    <compilerArgs>
-                        <compilerArg>--enable-preview</compilerArg>
-                    </compilerArgs>
                 </configuration>
             </plugin>
         </plugins>

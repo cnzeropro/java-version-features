@@ -11,29 +11,19 @@ import java.util.Objects;
 import java.util.TreeMap;
 
 /**
- * <a href="https://docs.oracle.com/javase/15">JDK 15 Documentation</a>
- * <h2>Language Features</h2>
+ * <a href="https://openjdk.org/projects/jdk/15/">JDK 15</a>
+ * <a href="https://docs.oracle.com/javase/15/">JDK 15 Documentation</a>
+ * <h1>Features</h1>
  * <ol>
- *     <li>【new】文本块（Text Blocks）{@link Java15#introduceTextBlock()}</li>
+ *     <li><a href="https://openjdk.org/jeps/378">378</a>：文本块（Text Blocks）{@link #introduceTextBlock()}</li>
+ *     <li><a href="https://openjdk.org/jeps/371">371</a>：隐式类（Hidden Classes）{@link #introduceHiddenClasses()}</li>
+ *     <li>【new】CharSequence 类新增 isEmpty 方法（Added isEmpty Default Method to CharSequence）{@link #addMethodForCharSequence()}</li>
+ *     <li>【new】重写 TreeMap 方法并改进性能（Specialized Implementations of TreeMap Methods）{@link #overrideTreeMapMethod()}</li>
  * </ol>
- *
- * <h2>Previews and Incubator</h2>
  * <ol>
- *     <li>【update】instanceof 模式匹配（Pattern Matching for instanceof）（第二次预览）</li>
- *     <li>【new】记录类（Record Classes）（第二次预览）</li>
- *     <li>【new】密封类（Sealed Classes）（首次预览）</li>
- * </ol>
- *
- * <h2>Libraries Improvements</h2>
- * <ol>
- *     <li>【new】隐式类（Hidden Classes）{@link Java15#introduceHiddenClasses()}</li>
- *     <li>【new】CharSequence 类新增 isEmpty 方法（Added isEmpty Default Method to CharSequence）{@link Java15#addMethodForCharSequence()}</li>
- *     <li>【new】重写 TreeMap 方法并改进性能（Specialized Implementations of TreeMap Methods）{@link Java15#overrideTreeMapMethod()}</li>
- * </ol>
- *
- * <h2>Changes</h2>
- * <ol>
- *     <li>【update】支持 Unicode 13.0（Support for Unicode 13.0）</li>
+ *     <li><a href="https://openjdk.org/jeps/375">375</a>：instanceof 模式匹配（Pattern Matching for instanceof）[第二次预览]</li>
+ *     <li><a href="https://openjdk.org/jeps/384">384</a>：记录类（Record Classes）[第二次预览]</li>
+ *     <li><a href="https://openjdk.org/jeps/360">360</a>：密封类（Sealed Classes）[首次预览]</li>
  * </ol>
  *
  * @author Zero (cnzeropro@qq.com)

@@ -4,7 +4,10 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
 
 /**
  * @author zero
@@ -14,45 +17,38 @@ public class Java5Test {
     Java5 java5 = new Java5();
 
     @Test
-    public void introduceGeneric() {
-        System.out.println("Current test: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-        java5.introduceGeneric();
+    public void generic() {
+        java5.generic();
     }
 
     @Test
     public void enhanceForLoop() {
-        System.out.println("Current test: " + new Exception().getStackTrace()[0].getMethodName());
         java5.enhanceForLoop();
     }
 
     @Test
-    public void addAutoBoxingAndUnboxing() {
-        System.out.println("Current test: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-        java5.addAutoBoxingAndUnboxing();
+    public void autoBoxingAndUnboxing() {
+        java5.autoBoxingAndUnboxing();
     }
 
     @Test
-    public void addTypesafeEnum() {
-        System.out.println("Current test: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-        java5.addTypesafeEnum();
+    public void typesafeEnum() {
+        java5.typesafeEnum();
     }
 
     @Test
-    public void addVarargs() {
-        System.out.println("Current test: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-        java5.addVarargs();
+    public void vararg() {
+        java5.vararg();
     }
 
     @Test
-    public void addStaticImport() {
-        System.out.println("Current test: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-        java5.addStaticImport();
+    public void staticImport() {
+        java5.staticImport();
     }
 
     @Test
-    public void introduceAnnotation() {
-        System.out.println("Current test: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-        java5.introduceAnnotation();
+    public void annotation() {
+        java5.annotation();
     }
 
     @Before
@@ -62,7 +58,7 @@ public class Java5Test {
 
     @After
     public void tearDown() {
-        System.out.println("*************************************************** End ***************************************************");
+        System.out.println("*************************************************** End ***************************************************\n");
     }
 
     @BeforeClass
@@ -73,6 +69,13 @@ public class Java5Test {
     @AfterClass
     public static void destroy() {
         System.out.println("Java 5 Test End");
-        System.out.println("=============================================================================================================================\n");
     }
+
+    @Rule
+    public TestWatcher watchman = new TestWatcher() {
+        @Override
+        protected void starting(Description description) {
+            System.out.println("Current test: " + description.getMethodName());
+        }
+    };
 }

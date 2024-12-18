@@ -1,117 +1,149 @@
 package org.zero;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
-
-import javax.script.ScriptException;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
 
 public class Java8Test {
-
     Java8 java8 = new Java8();
 
     @Test
-    public void introduceLambdaExpression() {
-        java8.introduceLambdaExpression();
+    public void lambdaExpression() {
+        java8.lambdaExpression();
     }
 
     @Test
-    public void addMethodReference() {
-        java8.addMethodReference();
+    public void methodReference() {
+        java8.methodReference();
     }
 
     @Test
-    public void addConstructorReference() {
-        java8.addConstructorReference();
+    public void constructorReference() {
+        java8.constructorReference();
     }
 
     @Test
-    public void addArrayReference() {
-        java8.addArrayReference();
+    public void arrayReference() {
+        java8.arrayReference();
     }
 
     @Test
-    public void add4CoreFunctionalInterface() {
-        java8.add4CoreFunctionalInterface();
+    public void coreFunctionalInterface() {
+        java8.coreFunctionalInterface();
     }
 
     @Test
-    public void addDefaultAndStaticMethod() {
-        java8.addDefaultAndStaticMethod();
+    public void defaultAndStaticMethod() {
+        java8.defaultAndStaticMethod();
     }
 
     @Test
-    public void addStreamApi() {
-        java8.addStreamApi();
+    public void stream() {
+        java8.stream();
     }
 
     @Test
-    public void addOptionalClass() {
-        java8.addOptionalClass();
+    public void optional() {
+        java8.optional();
     }
 
     @Test
-    public void addDateTimeApi() {
-        java8.addDateTimeApi();
+    public void dateTimeApi() {
+        java8.dateTimeApi();
     }
 
     @Test
-    public void addBase64Class() {
-        java8.addBase64Class();
+    public void base64() {
+        java8.base64();
     }
 
     @Test
-    public void addNashornScriptEngine() throws ScriptException {
-        java8.addNashornScriptEngine();
+    public void nashornScriptEngine() {
+        java8.nashornScriptEngine();
     }
 
     @Test
-    public void addRepeatableAnnotation() {
-        java8.addRepeatableAnnotation();
+    public void repeatableAnnotation() {
+        java8.repeatableAnnotation();
     }
 
     @Test
-    public void addArraysApi() {
-        java8.addArraysApi();
+    public void parallelArray() {
+        java8.parallelArray();
     }
 
     @Test
-    public void addJucClass() {
-        java8.addJucClass();
+    public void juc() {
+        java8.juc();
     }
 
     @Test
-    public void improveTypeInference() {
-        java8.improveTypeInference();
-    }
-
-    /**
-     * Method under test: {@link Java8#introduceTypeAnnotation()}
-     */
-    @Test
-    public void testIntroduceTypeAnnotation() {
-        java8.introduceTypeAnnotation();
+    public void typeInference() {
+        java8.typeInference();
     }
 
     /**
-     * Method under test: {@link Java8#addMethodParameterReflection()}
+     * Method under test: {@link Java8#typeAnnotation()}
      */
     @Test
-    public void testAddMethodParameterReflection() {
-        java8.addMethodParameterReflection();
+    public void typeAnnotation() {
+        java8.typeAnnotation();
     }
 
     /**
-     * Method under test: {@link Java8#improveHashMaps()}
+     * Method under test: {@link Java8#methodParameterReflection()}
      */
     @Test
-    public void testImproveHashMaps() {
-        java8.improveHashMaps();
+    public void methodParameterReflection() {
+        java8.methodParameterReflection();
     }
 
     /**
-     * Method under test: {@link Java8#supportUnsignedArithmetic()}
+     * Method under test: {@link Java8#hashMap()}
      */
     @Test
-    public void testSupportUnsignedArithmetic() {
-        java8.supportUnsignedArithmetic();
+    public void hashMap() {
+        java8.hashMap();
     }
+
+    /**
+     * Method under test: {@link Java8#unsignedArithmetic()}
+     */
+    @Test
+    public void unsignedArithmetic() {
+        java8.unsignedArithmetic();
+    }
+
+    @Before
+    public void setUp() {
+        System.out.println("************************************************** Start **************************************************");
+    }
+
+    @After
+    public void tearDown() {
+        System.out.println("*************************************************** End ***************************************************\n");
+    }
+
+    @BeforeClass
+    public static void init() {
+        System.out.println("Java 8 Test Start...");
+    }
+
+    @AfterClass
+    public static void destroy() {
+        System.out.println("Java 8 Test End");
+    }
+
+    @Rule
+    public TestWatcher watchman = new TestWatcher() {
+        @Override
+        protected void starting(Description description) {
+            System.out.println("Current test: " + description.getMethodName());
+        }
+    };
 }

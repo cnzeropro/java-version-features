@@ -11,7 +11,7 @@
 
     <artifactId>java-17</artifactId>
 
-    <name>java-17</name>
+    <name>java 17</name>
     <description>学习 Java 17 新特性</description>
 
     <build>
@@ -20,6 +20,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
+                    <release>17</release>
                     <source>17</source>
                     <target>17</target>
                 </configuration>

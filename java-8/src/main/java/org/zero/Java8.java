@@ -5,7 +5,6 @@ import lombok.SneakyThrows;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import java.lang.annotation.ElementType;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -31,14 +30,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.TimeZone;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.atomic.DoubleAccumulator;
 import java.util.concurrent.atomic.DoubleAdder;
 import java.util.concurrent.atomic.LongAccumulator;
 import java.util.concurrent.atomic.LongAdder;
-import java.util.concurrent.locks.StampedLock;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -46,41 +41,39 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
+ * <a href="https://openjdk.org/projects/jdk8/">JDK 8</a>
  * <a href="https://docs.oracle.com/javase/8/docs/">Java Platform Standard Edition 8 Documentation</a>
- * <h2>What's New in JDK 8</h2>
+ * <h1>Features</h1>
  * <ol>
- *     <li>【new】引入Lambda表达式（Lambda Expressions）{@link Java8#introduceLambdaExpression()}</li>
- *     <li>【new】新增方法引用（Method References）{@link Java8#addMethodReference()}</li>
- *     <li>【new】新增构造器引用。{@link Java8#addConstructorReference()}</li>
- *     <li>【new】新增数组引用。{@link Java8#addArrayReference()}</li>
- *     <li>【new】新增四大内置的核心函数式接口。{@link Java8#add4CoreFunctionalInterface()}</li>
- *     <li>【new】接口新增默认与静态方法。{@link Java8#addDefaultAndStaticMethod()}</li>
- *     <li>【new】新增Stream管道流操作。{@link Java8#addStreamApi()}</li>
- *     <li>【new】新增Optional容器类。{@link Java8#addOptionalClass()}</li>
- *     <li>【new】支持无符号算术。{@link Java8#supportUnsignedArithmetic()}</li>
- *     <li>【update】改进类型推断（Improved type inference）{@link Java8#improveTypeInference()}</li>
- *     <li>【new】引入类型批注（Type Annotations）{@link Java8#introduceTypeAnnotation()}</li>
- *     <li>【new】新增方法参数反射（Method parameter reflection）{@link Java8#addMethodParameterReflection()}</li>
- *     <li>【new】新增日期时间API（Date-Time API(JSR 310)）。{@link Java8#addDateTimeApi()}</li>
- *     <li>【update】改善HashMap相关性能。{@link Java8#improveHashMaps()}</li>
- *     <li>【new】JUC包新增并发相关的类。{@link Java8#addJucClass()}</li>
- *     <li>【new】新增@Repeatable注解（Repeating Annotations）{@link Java8#addRepeatableAnnotation()}</li>
- *     <li>【new】新增对数组的并行操作。{@link Java8#addArraysApi()}</li>
- *     <li>【new】Base64成为Java类库的标准。{@link Java8#addBase64Class()}</li>
- *     <li>【new】增加Nashorn JavaScript引擎。{@link Java8#addNashornScriptEngine()}</li>
- *     <li>【new】新增类依赖分析工具：jdeps（Java Dependency Analysis Tool (jdeps)）</li>
- *     <li>【remove】移除JDBC-ODBC。</li>
- *     <li>【update】JVM内存永久代（Permgen）已经被元空间（Metaspace）替换（JEP 122）。
- *     JVM参数-XX:PermSize和–XX:MaxPermSize分别被XX:MetaSpaceSize和-XX:MaxMetaspaceSize代替。</li>
+ *     <li>Lambda 表达式（Lambda Expressions）{@link #lambdaExpression()}</li>
+ *     <li>方法引用（Method References）{@link #methodReference()}</li>
+ *     <li>构造器引用{@link #constructorReference()}</li>
+ *     <li>数组引用{@link #arrayReference()}</li>
+ *     <li>四大内置的核心函数式接口{@link #coreFunctionalInterface()}</li>
+ *     <li>接口新增默认与静态方法{@link #defaultAndStaticMethod()}</li>
+ *     <li>Stream 管道流操作{@link #stream()}</li>
+ *     <li>Optional 容器类{@link #optional()}</li>
+ *     <li>支持无符号算术{@link #unsignedArithmetic()}</li>
+ *     <li><a href="https://openjdk.org/jeps/101">101</a>：改进类型推断（Generalized Target-Type Inference）{@link #typeInference()}</li>
+ *     <li><a href="https://openjdk.org/jeps/104">104</a>：类型批注（Type Annotations）{@link #typeAnnotation()}</li>
+ *     <li><a href="https://openjdk.org/jeps/118">118</a>：方法参数反射（Method parameter reflection）{@link #methodParameterReflection()}</li>
+ *     <li><a href="https://openjdk.org/jeps/150">150</a>：日期时间 API（Date-Time API(JSR 310)）{@link #dateTimeApi()}</li>
+ *     <li><a href="https://openjdk.org/jeps/180">180</a>：改善 HashMap 相关性能（Handle Frequent HashMap Collisions with Balanced Trees）{@link #hashMap()}</li>
+ *     <li><a href="https://openjdk.org/jeps/155">155</a>：JUC 包新增并发相关的类（Concurrency Updates）{@link #juc()}</li>
+ *     <li><a href="https://openjdk.org/jeps/120">120</a>：@Repeatable 注解（Repeating Annotations）{@link #repeatableAnnotation()}</li>
+ *     <li><a href="https://openjdk.org/jeps/103">103</a>：数组的并行操作（Parallel Array Sorting）{@link #parallelArray()}</li>
+ *     <li><a href="https://openjdk.org/jeps/135">135</a>：Base64 成为 Java 类库的标准（Base64 Encoding & Decoding）{@link #base64()}</li>
+ *     <li><a href="https://openjdk.org/jeps/174">174</a>：Nashorn JavaScript 引擎{@link #nashornScriptEngine()}</li>
+ *     <li><a href="https://openjdk.org/jeps/122">122</a>：移除永久代（Remove the Permanent Generation）{@link #permanentGeneration()}</li>
  * </ol>
  *
  * @author Zero
  */
 public class Java8 {
     /**
-     * Lambda表达式
+     * Lambda 表达式
      * <p>
-     * 使用格式：形参列表 -> Lambda体
+     * 使用格式：形参列表 -> Lambda 体
      * <p>
      * 1、“->”左边（形参列表）：
      * <table>
@@ -101,14 +94,14 @@ public class Java8 {
      *         <td>多参</td>
      *     </tr>
      * </table>
-     * 2、“->”右边（Lambda体）：
+     * 2、“->”右边（Lambda 体）：
      * <ul>
-     *     <li>lambda体（只有一条语句）（有无返回值都不用写return）</li>
-     *     <li>{lambda体（多条语句）}（有返回值时需写return）</li>
+     *     <li>lambda 体（只有一条语句）（有无返回值都不用写 return）</li>
+     *     <li>{lambda 体（多条语句）}（有返回值时需写 return）</li>
      * </ul>
      * 应用场景：实现函数式接口。
      */
-    public void introduceLambdaExpression() {
+    public void lambdaExpression() {
         // 传统的实现方法
         Runnable runnable1 = new Runnable() {
             @Override
@@ -136,7 +129,7 @@ public class Java8 {
      * 引用场景：
      * 当要传递给Lambda体的操作，已经有实现的方法了，就可使用方法引用。
      */
-    public void addMethodReference() {
+    public void methodReference() {
         System.out.println("~~~对象::实例方法名~~~");
         String string = "java";
         Predicate<String> predicate1 = s -> string.equals(s);
@@ -166,7 +159,7 @@ public class Java8 {
      * <p>
      * xxx::new
      */
-    public void addConstructorReference() {
+    public void constructorReference() {
         Supplier<Student> supplier1 = () -> new Student();
         System.out.println("Lambda表达式实现：" + supplier1.get());
 
@@ -181,7 +174,7 @@ public class Java8 {
      * <p>
      * xxx[]::new
      */
-    public void addArrayReference() {
+    public void arrayReference() {
         Function<Integer, Student[]> function1 = i -> new Student[i];
         System.out.println("Lambda表达式实现：" + Arrays.toString(function1.apply(3)));
 
@@ -208,7 +201,7 @@ public class Java8 {
      * Function<T, R>
      * R apply(T t)
      */
-    public void add4CoreFunctionalInterface() {
+    public void coreFunctionalInterface() {
         FunctionalInterfaces functionalInterfaces = new FunctionalInterfaces();
 
         // 供给型接口
@@ -236,7 +229,7 @@ public class Java8 {
      * <p>
      * 现在接口除了抽象方法，还可定义默认和静态方法
      */
-    public void addDefaultAndStaticMethod() {
+    public void defaultAndStaticMethod() {
         Printer printer = System.out::println;
         printer.print1("调用接口抽象方法（已通过方法引用实现）");
         printer.print2("调用接口默认方法");
@@ -250,7 +243,7 @@ public class Java8 {
      * <p>
      * 作用：主要用于集合数据的处理
      */
-    public void addStreamApi() {
+    public void stream() {
         List<Student> data = Arrays.asList(
                 new Student("CDTU-1", "小明", 'M', 18, 89.6),
                 new Student("CDTU-2", "小芳", 'F', 21, 92.8),
@@ -263,7 +256,7 @@ public class Java8 {
                 new Student("CDTU-9", "小王", 'M', 21, 94.2),
                 new Student("CDTU-10", "小魏", 'M', 20, 86.3));
 
-        // 并行流，一般比串行流stream()快，但因为其依赖于Fork/Join框架，所以最终处理出的数据并不是和原数据顺序保持一致
+        // 并行流，一般比串行流 stream() 快，但因为其依赖于 Fork/Join 框架，所以最终处理出的数据并不是和原数据顺序保持一致
         Map<Integer, Map<String, Student>> students = data.parallelStream()
                 // 过滤出成绩大于90的数据
                 .filter(s -> s.getScore() > 90.0)
@@ -271,14 +264,14 @@ public class Java8 {
                 .peek(s -> {
                     if (s.getSex() == 'M') {
                         s.setSex('男');
-                    } else {
+                    } else if (s.getSex() == 'F') {
                         s.setSex('女');
                     }
                 })
                 // 成绩降序排序
                 .sorted(Comparator.comparing(Student::getScore).reversed())
                 // 按照年龄分组并转成集合
-                .collect(Collectors.groupingBy(Student::getAge, Collectors.toMap(Student::getName, Function.identity(), (s1, s2) -> s2, LinkedHashMap::new)));
+                .collect(Collectors.groupingBy(Student::getAge, Collectors.toMap(Student::getName, Function.identity(), (oldVal, newVal) -> newVal, LinkedHashMap::new)));
 
         System.out.println("原始数据：" + data);
         System.out.println("处理后的数据：" + students);
@@ -289,7 +282,7 @@ public class Java8 {
      * <p>
      * 用于避免臭名昭著的空指针异常
      */
-    public void addOptionalClass() {
+    public void optional() {
         Student student = new Student("123456", "小明", null, 18, 65.74);
         Character sex = Optional.of(student)
                 .map(Student::getSex)
@@ -300,16 +293,18 @@ public class Java8 {
     }
 
     /**
-     * 增加新的时间日期API
+     * 新的时间日期 API
      * <p>
-     * 在旧版的Java中，日期时间API存在诸多问题，其中有：
+     * 在旧版的 Java 中，日期时间 API 存在诸多问题，其中有：
      * <ul>
-     *     <li>非线程安全 − java.util.Date 是非线程安全的，所有的日期类都是可变的，这是Java日期类最大的问题之一。</li>
-     *     <li>设计很差 − Java的日期/时间类的定义并不一致，在java.util和java.sql的包中都有日期类，此外用于格式化和解析的类在java.text包中定义。java.util.Date同时包含日期和时间，而java.sql.Date仅包含日期，将其纳入java.sql包并不合理。另外这两个类都有相同的名字，这本身就是一个非常糟糕的设计。</li>
-     *     <li>时区处理麻烦 − 日期类并不提供国际化，没有时区支持，因此Java引入了java.util.Calendar和java.util.TimeZone类，但他们同样存在上述所有的问题。</li>
+     *     <li>非线程安全 − {@link java.util.Date} 是非线程安全的，所有的日期类都是可变的，这是 Java 日期类最大的问题之一。</li>
+     *     <li>设计很差 − Java 的日期/时间类的定义并不一致，在 <code>java.util</code> 和 <code>java.sql</code> 的包中都有日期类，此外用于格式化和解析的类在 <code>java.text</code> 包中定义。
+     *     {@link java.util.Date} 同时包含日期和时间，而 {@link java.sql.Date} 仅包含日期，将其纳入 <code>java.sql</code> 包并不合理。
+     *     另外这两个类都有相同的名字，这本身就是一个非常糟糕的设计。</li>
+     *     <li>时区处理麻烦 − 日期类并不提供国际化，没有时区支持，因此 Java 引入了 {@link java.util.Calendar} 和 {@link java.util.TimeZone} 类，但他们同样存在上述所有的问题。</li>
      * </ul>
      */
-    public void addDateTimeApi() {
+    public void dateTimeApi() {
         Date date = new Date();
         System.out.println("Date：" + date);
         Calendar calendar = Calendar.getInstance();
@@ -317,7 +312,7 @@ public class Java8 {
         TimeZone timeZone = TimeZone.getDefault();
         System.out.println("TimeZone：" + timeZone);
 
-        // java 8 新的时间API
+        // java 8 新的时间 API
         Instant instant = Instant.now();
         System.out.println("Instant：" + instant);
         LocalDate localDate = LocalDate.now();
@@ -335,9 +330,9 @@ public class Java8 {
     }
 
     /**
-     * Base64编码成为Java类库的标准
+     * Base64 编码成为 Java 类库的标准
      */
-    public void addBase64Class() {
+    public void base64() {
         String srcString = "我是一串小小的、可爱的 Java 字符串";
         System.out.println("原字串：" + srcString);
 
@@ -349,15 +344,23 @@ public class Java8 {
     }
 
     /**
-     * 新增Nashorn JavaScript引擎，用于取代Rhino JavaScript引擎
+     * 新增 Nashorn JavaScript 引擎，用于取代 Rhino JavaScript 引擎
      * <p>
-     * 在Java环境下，除了通过代码运行js源码，也可以通过<code>jjs func.js</code>命令接受js源码并执行
+     * 在 Java 环境下，除了通过代码运行 js 源码，也可以通过 <code>jjs func.js</code> 命令接受 js 源码并执行
      */
-    public void addNashornScriptEngine() throws ScriptException {
+    @SneakyThrows
+    public void nashornScriptEngine() {
         ScriptEngineManager manager = new ScriptEngineManager();
+        List<String> engineInfos = manager.getEngineFactories()
+                .stream()
+                .map(scriptEngineFactory -> String.format("Script Engine Name: %s, Version: %s", scriptEngineFactory.getEngineName(), scriptEngineFactory.getEngineVersion()))
+                .collect(Collectors.toList());
+        System.out.println("Script Engine Factories: " + engineInfos);
+
         ScriptEngine engine = manager.getEngineByName("JavaScript");
-        System.out.println("Script Engine Name: " + engine.getClass().getName());
-        Object result = engine.eval("function f() { return 1; }; f() + 1;");
+        System.out.println("JavaScript Engine Name: " + engine.getClass().getName());
+        String script = "function f() { return 1; }; f() + 1;";
+        Object result = engine.eval(script);
         System.out.println("Result: " + result);
     }
 
@@ -368,15 +371,15 @@ public class Java8 {
      */
     @Description("描述1")
     @Description("描述2")
-    public void addRepeatableAnnotation() {
+    @Description("描述3")
+    public void repeatableAnnotation() {
         String description = Optional.of(this.getClass())
                 .map(c -> {
                     try {
-                        return c.getDeclaredMethod("addRepeatableAnnotation");
+                        return c.getDeclaredMethod("repeatableAnnotation");
                     } catch (NoSuchMethodException e) {
-                        e.printStackTrace();
+                        throw new RuntimeException(e);
                     }
-                    return null;
                 })
                 .map(m -> m.getAnnotationsByType(Description.class))
                 .map(Arrays::stream)
@@ -389,9 +392,9 @@ public class Java8 {
     /**
      * 提供了对数组的并行操作
      * <p>
-     * Arrays工具类提供相关parallel开头的方法，用于进行对数组相关的并行操作
+     * Arrays 工具类提供相关 parallel 开头的方法，用于进行对数组相关的并行操作
      */
-    public void addArraysApi() {
+    public void parallelArray() {
         double[] nums = new double[100];
         System.out.println("初始化后：" + Arrays.toString(nums));
         Arrays.parallelSetAll(nums, operand -> Math.random() * operand);
@@ -403,11 +406,11 @@ public class Java8 {
     }
 
     /**
-     * JUC包新增相关类
+     * JUC 包新增相关类
      * <p>
      * 用于多线程与并发增强
      */
-    public void addJucClass() {
+    public void juc() {
         LongAdder longAdder = new LongAdder();
         longAdder.increment();
         System.out.println(longAdder.sum());
@@ -424,12 +427,16 @@ public class Java8 {
         CompletableFuture<String> completableFuture = CompletableFuture.completedFuture("java");
         System.out.println(completableFuture.join());
 
-        StampedLock stampedLock = new StampedLock();
-
-        ConcurrentHashMap<String, Object> concurrentHashMap = new ConcurrentHashMap<>();
-        ConcurrentSkipListMap<String, Object> concurrentSkipListMap = new ConcurrentSkipListMap<>();
-
-        ForkJoinPool forkJoinPool = ForkJoinPool.commonPool();
+        // 带戳锁
+        StampedLockExample stampedLockExample = new StampedLockExample();
+        // 写操作
+        stampedLockExample.write(Math.random());
+        // 读写操作
+        stampedLockExample.readAndWrite();
+        // 读操作
+        System.out.println("Read data: " + stampedLockExample.read());
+        // 乐观读操作
+        System.out.println("Optimistic read data: " + stampedLockExample.optimisticRead());
     }
 
     /**
@@ -437,16 +444,14 @@ public class Java8 {
      * <p>
      * 在 java 8 中，无需显式声明参数类型
      */
-    public void improveTypeInference() {
-        List<String> list = new ArrayList<>();
-
+    public void typeInference() {
         // 以前写法（必须指定类型）
-        list.addAll(Arrays.<String>asList("Apple", "Orange"));
+        List<String> list1 = Arrays.<String>asList("Apple", "Orange");
+        System.out.println("Fruit list1: " + list1);
 
         // 现在写法（无需指定）
-        list.addAll(Arrays.asList("Banana", "Pear"));
-
-        System.out.println("Fruit: " + list);
+        List<String> list2 = Arrays.asList("Banana", "Pear");
+        System.out.println("Fruit list2: " + list2);
     }
 
     /**
@@ -455,7 +460,7 @@ public class Java8 {
      * 在 java 8 中，可将注解应用于任何使用类型的位置的功能，而不仅仅是在声明上。此功能与可插入类型系统一起使用，可以改进代码的类型检查。
      * 只有使用了 @Target({@link ElementType#TYPE_USE}) 的注解，才能应用到其他位置。
      */
-    public void introduceTypeAnnotation() {
+    public void typeAnnotation() {
         List<@NonNull String> list0 = new ArrayList<>();
         ArrayList<String> list1 = (@NonNull ArrayList<String>) list0;
         BigDecimal bigDecimal = new @Description("Big Decimal") BigDecimal("45536.55");
@@ -470,7 +475,7 @@ public class Java8 {
      * 如果使用了这个编译选项，那么在运行时，可以通过 Parameter.getName() 直接获取参数的实际名称，而不是默认的 arg0、arg1 等。
      */
     @SneakyThrows
-    public void addMethodParameterReflection() {
+    public void methodParameterReflection() {
         Method method = String.class.getMethod("indexOf", String.class, int.class);
         Parameter[] parameters = method.getParameters();
         for (Parameter parameter : parameters) {
@@ -480,7 +485,7 @@ public class Java8 {
     }
 
     /**
-     * 改善HashMap相关性能
+     * 改善 HashMap 相关性能
      * <p>
      * Java 8 及其之后的版本在 HashMap 处理键碰撞（key collisions）方面进行了性能优化，主要引入了红黑树（Red-Black Tree）来替代链表。
      * <p>
@@ -494,18 +499,21 @@ public class Java8 {
      * <p>
      * 这一性能改进使得 HashMap 能够更好地应对各种负载因素和键分布的情况，提高了其在实际应用中的性能表现。
      */
-    public void improveHashMaps() {
+    public void hashMap() {
         Map<String, Object> map = new HashMap<>();
+        map.put("key1", "value1");
+        map.put("key2", "value2");
+        System.out.println(map);
     }
 
     /**
      * 支持无符号算术
      * <p>
-     * Java语言一直以来都没有提供原生的无符号整数类型，所有整数类型都是有符号的。
-     * 从Java 8 开始，提供了一些静态方法用于执行无符号整数运算。
+     * Java 语言一直以来都没有提供原生的无符号整数类型，所有整数类型都是有符号的。
+     * 从 Java 8 开始，提供了一些静态方法用于执行无符号整数运算。
      * 然而这并不是引入原生的无符号整数类型，而是通过方法调用来模拟无符号运算。
      */
-    public void supportUnsignedArithmetic() {
+    public void unsignedArithmetic() {
         int i = Integer.divideUnsigned(10, 3);
         System.out.println("Integer.divideUnsigned: " + i);
         long l = Long.remainderUnsigned(4365346, 56656);
@@ -514,5 +522,14 @@ public class Java8 {
         System.out.println("Byte.toUnsignedInt: " + i1);
         long l1 = Short.toUnsignedLong((short) 10);
         System.out.println("Short.toUnsignedLong: " + l1);
+    }
+
+    /**
+     * JVM 内存永久代（Permgen）已经被元空间（Metaspace）替换
+     * <p>
+     * JVM 参数 <code>-XX:PermSize</code> 和 <code>–XX:MaxPermSize</code> 分别被 <code>XX:MetaSpaceSize</code> 和 <code>-XX:MaxMetaspaceSize</code> 代替。
+     */
+    public void permanentGeneration() {
+        System.out.println("Remove the Permanent Generation");
     }
 }

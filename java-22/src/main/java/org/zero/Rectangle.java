@@ -10,6 +10,8 @@ public record Rectangle<T extends Number>(T length, T width) implements Shape {
         return """
                 This is:
                 ▭
-                """;
+                Which with length: %s, width: %s
+                """
+                .formatted(length, width);
     }
 }

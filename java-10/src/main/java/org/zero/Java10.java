@@ -15,34 +15,18 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * <a href="https://docs.oracle.com/javase/10">JDK 10 Documentation</a>
- * <h2>Language Features</h2>
+ * <a href="https://openjdk.org/projects/jdk/10/">JDK 10</a>
+ * <a href="https://docs.oracle.com/javase/10/">JDK 10 Documentation</a>
+ * <h1>Features</h1>
  * <ol>
- *     <li>【new】局部变量类型推断（Local Variable Type Inference）{@link Java10#introduceVarIdentifier}</li>
- * </ol>
- *
- * <h2>Previews and Incubator</h2>
- * <ol>
- * </ol>
- *
- * <h2>Libraries Improvements</h2>
- * <ol>
- *     <li>【new】新增创建不可修改集合的API（APIs for Creating Unmodifiable Collections）{@link Java10#addCreatingUnmodifiableCollectionsApi}</li>
- *     <li>【new】新增 @summary 内联标记（Comment Tag for Summary of an API Description）{@link Java10#addSummaryInlineTag}</li>
- *     <li>【new】新增 Optional 类方法（Optional.orElseThrow() Method）{@link Java10#enhanceOptionalApi}</li>
- *     <li>【new】重载 ByteArrayOutputStream 的 toString 方法。{@link Java10#overloadToStringMethod}</li>
- * </ol>
- *
- * <h2>Changes</h2>
- * <ol>
- *     <li>【update】类文件版本号变更为54.0（Class File Version Number is 54.0）</li>
- *     <li>【update】改进 for-each 的字节码生成（Bytecode Generation for Enhanced for Loop）</li>
- *     <li>【update】删除 native-header 工具（Remove the Native-Header Generation Tool (javah)）<p>
- *     native-header 工具（javah）已被删除，现使用{@code javac -h}代替
- *     </li>
- *     <li>【delete】删除旧的 LookAndFeel 支持（Removal of Support for Using Old LookAndFeel）</li>
- *     <li>【delete】删除过时的 -X 选项（Removal of Obsolete -X Options）<p>
- *     删除过时的 HotSpot VM 选项，包括：-Xoss、-Xsqnopause、-Xoptimize、-Xboundthreads、-Xusealtsigs</li>
+ *     <li><a href="https://openjdk.org/jeps/286">286</a>：局部变量类型推断（Local Variable Type Inference）{@link #introduceVarIdentifier()}</li>
+ *     <li>新增创建不可修改集合的API（APIs for Creating Unmodifiable Collections）{@link #addCreatingUnmodifiableCollectionsApi()}</li>
+ *     <li>新增 @summary 内联标记（Comment Tag for Summary of an API Description）{@link #addSummaryInlineTag()}</li>
+ *     <li>新增 Optional 类方法（Optional.orElseThrow() Method）{@link #enhanceOptionalApi()}</li>
+ *     <li>重载 ByteArrayOutputStream 的 toString 方法{@link #overloadToStringMethod()}</li>
+ *     <li>类文件版本号变更为54.0（Class File Version Number is 54.0）</li>
+ *     <li>改进 for-each 的字节码生成（Bytecode Generation for Enhanced for Loop）</li>
+ *     <li><a href="https://openjdk.org/jeps/313">313</a>：删除 native-header 工具（Remove the Native-Header Generation Tool(javah)）{@link #removeJavah()}</li>
  * </ol>
  *
  * @author Zero
@@ -65,7 +49,7 @@ public class Java10 {
      * 请注意，var 不是关键字，而是一个保留类型名，这意味着用作变量、方法或包名的代码不会受到影响，但用作类或接口名称的代码将会受到影响。
      */
     public void introduceVarIdentifier() {
-        // 不能为null
+        // 不能为 null
         // var a = null;
 
         var numInt = 2147483647;
@@ -152,13 +136,10 @@ public class Java10 {
         var set = random.ints(12, 10, 100).boxed()
                 .collect(Collectors.toUnmodifiableSet());
         var map = random.ints(12, 10, 100).boxed()
-                .collect(Collectors.toUnmodifiableMap(i -> i + "a", Function.identity()));
-        var map1 = random.ints(12, 10, 100).boxed()
                 .collect(Collectors.toUnmodifiableMap(i -> i + "a", Function.identity(), (v1, v2) -> v2));
         System.out.println("list: " + list);
         System.out.println("set: " + set);
         System.out.println("map: " + map);
-        System.out.println("map1: " + map1);
 
         // copyOf
         var resultList = List.copyOf(list);
@@ -172,9 +153,9 @@ public class Java10 {
     }
 
     /**
-     * 重载{@link ByteArrayOutputStream#toString}方法
+     * 重载 {@link ByteArrayOutputStream#toString} 方法
      * <p>
-     * 新增{@link java.io.ByteArrayOutputStream#toString(java.nio.charset.Charset)}，该方法通过使用指定的字符集编码字节，将缓冲区的内容转换为字符串。
+     * 新增 {@link java.io.ByteArrayOutputStream#toString(java.nio.charset.Charset)}，该方法通过使用指定的字符集编码字节，将缓冲区的内容转换为字符串。
      */
     public void overloadToStringMethod() {
         var str = "Hello! 你好！";
@@ -192,7 +173,16 @@ public class Java10 {
             var s = baos.toString(StandardCharsets.UTF_8);
             System.out.println("字符串：" + s);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * 移除 javah 工具
+     * <p>
+     * native-header 工具（javah）已被删除，现使用 {@code javac -h} 代替
+     */
+    public void removeJavah() {
+        System.out.println("remove javah");
     }
 }

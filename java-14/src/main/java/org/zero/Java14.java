@@ -5,26 +5,17 @@ import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * <a href="https://docs.oracle.com/javase/14">JDK 14 Documentation</a>
- * <h2>Language Features</h2>
+ * <a href="https://openjdk.org/projects/jdk/14/">JDK 14</a>
+ * <a href="https://docs.oracle.com/javase/14/">JDK 14 Documentation</a>
+ * <h1>Features</h1>
  * <ol>
- *     <li>【update】switch 表达式（Switch Expressions）{@link Java14#improveSwitchExpression()}</li>
+ *     <li><a href="https://openjdk.org/jeps/361">361</a>：switch 表达式（Switch Expressions）{@link #improveSwitchExpression()}</li>
+ *     <li>支持会计币种格式（Accounting Currency Format Support）{@link #supportAccountingCurrencyFormat()}</li>
  * </ol>
- *
- * <h2>Previews and Incubator</h2>
  * <ol>
- *     <li>【update】instanceof 模式匹配（Pattern Matching for the instanceof Operator）（首次预览）</li>
- *     <li>【new】记录类（Records）（首次预览）</li>
- *     <li>【new】文本块（Text Blocks）（第二次预览）</li>
- * </ol>
- *
- * <h2>Libraries Improvements</h2>
- * <ol>
- *     <li>【new】支持会计币种格式（Accounting Currency Format Support）{@link Java14#supportAccountingCurrencyFormat()}</li>
- * </ol>
- *
- * <h2>Changes</h2>
- * <ol>
+ *     <li><a href="https://openjdk.org/jeps/305">305</a>：instanceof 模式匹配（Pattern Matching for the instanceof Operator）[首次预览]</li>
+ *     <li><a href="https://openjdk.org/jeps/359">359</a>：记录类（Records）[首次预览]</li>
+ *     <li><a href="https://openjdk.org/jeps/368">368</a>：文本块（Text Blocks）[第二次预览]</li>
  * </ol>
  *
  * @author Zero (cnzeropro@qq.com)

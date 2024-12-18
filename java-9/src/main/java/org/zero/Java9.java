@@ -14,84 +14,37 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
- * <a href="https://docs.oracle.com/javase/9">Oracle JDK 9 Documentation</a>
- * <h2>Language Features</h2>
+ * <a href="https://openjdk.org/projects/jdk9/">JDK 9</a>
+ * <a href="https://docs.oracle.com/javase/9/">Oracle JDK 9 Documentation</a>
+ * <h1>Features</h1>
  * <ol>
- *     <li>【new】Java 平台模块系统（JPMS: Java Platform Module System）。参见：{@link module-info.java}</li>
- *     <li>【new】接口增加私有方法（Support for Private Interface Methods）{@link Java9#addPrivateMethodInInterface()}</li>
- *     <li>【update】try-with-resources 语句（More Concise try-with-resources Statements）{@link Java9#improveTryWithResourcesStatement()}</li>
- *     <li>【update】私有实例方法允许使用 @SafeVarargs 注解（@SafeVarargs Annotation Allowed on Private Instance Methods）{@link Java9#enhanceSafeVarargsAnnotation()}</li>
- *     <li>【update】改进钻石操作符（Diamond Syntax and Anonymous Inner Classes）{@link Java9#upgradeDiamondOperator()}</li>
- *     <li>【update】下划线字符（“_”）不是法定名称（Underscore Character Not Legal Name）<p>
- *     如果使用下划线字符作为标识符，则无法再编译源代码了。
- *     </li>
- * </ol>
- *
- * <h2>Previews and Incubator</h2>
- * <ol>
- * </ol>
- *
- * <h2>Libraries Improvements</h2>
- * <ol>
- * </ol>
- *
- * <h2>Changes</h2>
- * <ol>
- *     <li>【update】@Deprecated注解新增属性。{@link Java9#improveDeprecatedAnnotation()}</li>
- *     <li>【new】集合新增静态工厂方法：of方法。{@link Java9#addOfMethod()}</li>
- *     <li>【update】Stream 类新增方法。{@link Java9#enhanceStreamApi()}</li>
- *     <li>【update】Optional 类新增方法。{@link Java9#enhanceOptionalApi()}</li>
- *     <li>【update】Process 类新增方法。{@link Java9#enhanceProcessApi()}</li>
- *     <li>【update】CompletableFuture 类新增方法。{@link Java9#enhanceCompletableFutureApi()}</li>
- *     <li>【update】新的 JDK 版本控制方案（New Version-String Scheme）{@link Java9#updateVersioningScheme()}</li>
- *     <li>【update】默认使用 CLDR 语言环境数据（Use CLDR locale data by default）<p>
- *     在 JDK 9 中，默认区域设置数据使用派生自 Unicode 联盟的通用区域设置数据存储库 （CLDR） 的数据。
- *     但是，CLDR 不为大多数3个字母的时区 ID 提供本地化的显示名称，因此显示名称可能与 JDK 8 及更早版本不同。
- *     因此，JDK 继续提供旧版 JRE 语言环境数据，使用 system 属性：java.locale.providers 可用于配置查找顺序。
- *     要启用与 JDK 8 兼容的行为，可以使用以下命令设置系统属性：{@code -Djava.locale.providers=COMPAT,SPI}
- *     </li>
- *     <li>【remove】取消对1.5及更早版本源代码和目标选项的支持（Remove support for 1.5 and earlier source and target options）。
- *     该版本 javac 命令不再支持 -source 或 -target 选项在 6/1.6 之前版本的值。
- *     但是，较旧的类文件仍可由 javac 读取，旧版本的源代码可以移植到较新的源代码级别。
- *     要生成早于 JDK 6 发行版可用的类文件，可以使用 JDK 6、7 或 8 发行版系列中的 javac 文件。
- *     </li>
- *     <li>【update】将默认 GC 更改为 G1（Change default GC to G1）<p>
- *     在 JDK 9 中，当未显式指定垃圾回收器时，默认垃圾回收器为 G1。
- *     与面向吞吐量的收集器（如 Parallel GC）相比，G1 为大多数用户提供了更好的整体体验。
- *     </li>
- *     <li>【new】模块化运行时映像（Modular Run-Time Images）</li>
- *     <li>【update】将类文件版本更新为 53.0（Update class file version to 53.0）</li>
- *     <li>【update】紧凑、小巧的 Strings（Compact Strings）<p>
- *     {@link java.lang.String}、{@link java.lang.StringBuilder} 和 {@link java.lang.StringBuffer}类的内部存储由原有的 char[] 变更为 byte[]。
- *     此项改动减少了底层存储的开销，良好情况下（Strings 对象全是单字节字符 Strings），可将存储字符所需的空间量减少 50%。
- *     如果要回到 Java 8 的支持，Java 9 中引入了一个新的 jvm 选项{@code -XX：-CompactStrings} 来禁用此功能。
- *     </li>
- *     <li>【new】引入弃用警告（Deprecation Warnings Introduced）{@link Java9#introduceDeprecationWarning()}</li>
- *     <li>【new】Unicode 8 支持（Unicode 8 support）<p>
- *     自支持 Unicode 6.2.0 的 JDK 8 发布以来，Unicode 8.0 引入了以下新功能，现在这些功能现在包含在 JDK 9 中：
- *     <ul>
- *         <li>10555 new characters</li>
- *         <li>42 new blocks</li>
- *         <li>29 scripts</li>
- *     </ul>
- *     </li>
- *     <li>【update】基于 UTF-8 编码的 Properties 文件（UTF-8 based Properties Files）<p>
- *     ResourceBundle 现在支持 UTF-8 编码的属性文件，并在需要时自动回退到 ISO-8859-1 编码。
- *     </li>
- *     <li>【new】使用 deprecated javadoc 标签而不使用 @Deprecated 注解，编译器将发出警告（Compiler will emit a warning if deprecated javadoc tag is used without @Deprecated annotation）<p>
- *     如果在元素上使用 javadoc deprecated 标记，而没有使用 @Deprecated 注解该元素，那么默认情况下，编译器将为此生成新的警告。
- *     可以通过命令行选项{@code -Xlint:-dep-ann}或使用{@code @SuppressWarnings("dep-ann")}注解来抑制新警告。
- *     </li>
- *     <li>【new】JShell：Java 交互式编程工具（JShell -- New tool and API for interactive Java）</li>
- *     <li>【remove】弃用盒装基元构造函数（Deprecation of Boxed Primitive Constructors）</li>
- *     <li>【remove】弃用{@link java.lang.Object#finalize}方法（ Deprecate Object.finalize）<p>
- *     Object.finalize 方法已被弃用。终结机制本身就存在问题，并可能导致性能问题、死锁和挂起。
- *     {@link java.lang.ref.Cleaner}和{@link java.lang.ref.PhantomReference}提供更灵活、更高效的方法，以便在对象变得不可访问时释放资源。
- *     </li>
+ *     <li><a href="https://openjdk.org/jeps/261">261</a>：Java 平台模块系统（JPMS: Java Platform Module System）</li>
+ *     <li>接口增加私有方法（Support for Private Interface Methods）{@link #addPrivateMethodInInterface()}</li>
+ *     <li>try-with-resources 语句（More Concise try-with-resources Statements）{@link #improveTryWithResourcesStatement()}</li>
+ *     <li>私有实例方法允许使用 @SafeVarargs 注解（@SafeVarargs Annotation Allowed on Private Instance Methods）{@link #enhanceSafeVarargsAnnotation()}</li>
+ *     <li>改进钻石操作符（Diamond Syntax and Anonymous Inner Classes）{@link #upgradeDiamondOperator()}</li>
+ *     <li>下划线字符（“_”）不是法定名称（Underscore Character Not Legal Name）</li>
+ *     <li><a href="https://openjdk.org/jeps/211">211</a>：引入弃用警告（Deprecation Warnings Introduced）{@link #introduceDeprecationWarning()}</li>
+ *     <li>@Deprecated 注解新增属性{@link #improveDeprecatedAnnotation()}</li>
+ *     <li>集合新增静态工厂方法：of方法{@link #addOfMethod()}</li>
+ *     <li>Stream 类新增方法{@link #enhanceStreamApi()}</li>
+ *     <li>Optional 类新增方法{@link #enhanceOptionalApi()}</li>
+ *     <li><a href="https://openjdk.org/jeps/102">102</a>：Process 类新增方法（Process API Updates）{@link #enhanceProcessApi()}</li>
+ *     <li>CompletableFuture 类新增方法{@link #enhanceCompletableFutureApi()}</li>
+ *     <li><a href="https://openjdk.org/jeps/223">223</a>：新的 JDK 版本控制方案（New Version-String Scheme）{@link #updateVersioningScheme()}</li>
+ *     <li><a href="https://openjdk.org/jeps/248">248</a>：将默认 GC 改为 G1（Change default GC to G1）{@link #g1Gc()}</li>
+ *     <li>取消对1.5及更早版本源代码和目标选项的支持（Remove support for 1.5 and earlier source and target options）{@link #sourceAndTargetOption()}</li>
+ *     <li>更新类文件版本为 53.0（Update class file version to 53.0）</li>
+ *     <li><a href="https://openjdk.org/jeps/254">254</a>：String 优化（Compact Strings）{@link #compactString()}</li>
+ *     <li>基于 UTF-8 编码的 Properties 文件（UTF-8 based Properties Files）{@link #utf8Properties()}</li>
+ *     <li>弃用{@link java.lang.Object#finalize}方法（Deprecate Object.finalize）{@link #deprecateFinalize()}</li>
+ *     <li><a href="https://openjdk.org/jeps/222">222</a>：JShell：Java 交互式编程工具（JShell -- New tool and API for interactive Java）</li>
+ *     <li><a href="https://openjdk.org/jeps/259">259</a>：{@link StackWalker} 类（Stack-Walking API）{@link #stackWalking()}</li>
  * </ol>
  *
  * @author Zero
@@ -342,5 +295,62 @@ public class Java9 {
     @SafeVarargs
     private <T> void m(T... args) {
         System.out.println(Arrays.toString(args));
+    }
+
+    /**
+     * 更改默认的垃圾回收器为 G1
+     * <p>
+     * 在 JDK 9 中，当未显式指定垃圾回收器时，默认垃圾回收器为 G1。
+     * 与面向吞吐量的收集器（如 Parallel GC）相比，G1 为大多数用户提供了更好的整体体验。
+     */
+    public void g1Gc() {
+        System.out.println("Make G1 the Default Garbage Collector");
+    }
+
+    /**
+     * 取消对1.5及更早版本源代码和目标选项的支持
+     * <p>
+     * 该版本 javac 命令不再支持 -source 或 -target 选项在 6/1.6 之前版本的值。
+     * 但是，较旧的类文件仍可由 javac 读取，旧版本的源代码可以移植到较新的源代码级别。
+     * 要生成早于 JDK 6 发行版可用的类文件，可以使用 JDK 6、7 或 8 发行版系列中的 javac 文件。
+     */
+    public void sourceAndTargetOption() {
+
+    }
+
+    /**
+     * String 优化
+     * <p>
+     * {@link java.lang.String}、{@link java.lang.StringBuilder} 和 {@link java.lang.StringBuffer} 类的内部存储由原有的 char[] 变更为 byte[]。
+     * 此项改动减少了底层存储的开销，良好情况下（Strings 对象全是单字节字符 Strings），可将存储字符所需的空间量减少 50%。
+     * 如果要回到 Java 8 的支持，Java 9 中引入了一个新的 jvm 选项 {@code -XX：-CompactStrings} 来禁用此功能。
+     */
+    public void compactString() {
+
+    }
+
+    /**
+     * 基于 UTF-8 编码的 Properties 文件
+     * <p>
+     * ResourceBundle 现在支持 UTF-8 编码的属性文件，并在需要时自动回退到 ISO-8859-1 编码。
+     */
+    public void utf8Properties() {
+
+    }
+
+    /**
+     * 弃用 {@link java.lang.Object#finalize()} 方法
+     * <p>
+     * 终结机制本身就存在问题，并可能导致性能问题、死锁和挂起。
+     * {@link java.lang.ref.Cleaner}和 {@link java.lang.ref.PhantomReference} 提供更灵活、更高效的方法，以便在对象变得不可访问时释放资源。
+     */
+    public void deprecateFinalize() {
+
+    }
+
+    public void stackWalking() {
+        List<StackWalker.StackFrame> stackFrames = StackWalker.getInstance()
+                .walk(frames -> frames.collect(Collectors.toList()));
+        System.out.println(stackFrames);
     }
 }

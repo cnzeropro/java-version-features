@@ -12,7 +12,7 @@
 
     <artifactId>java-21</artifactId>
 
-    <name>java-21</name>
+    <name>java 21</name>
     <description>学习 Java 21 新特性</description>
 
     <build>
@@ -21,6 +21,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
+                    <release>21</release>
                     <source>21</source>
                     <target>21</target>
                 </configuration>

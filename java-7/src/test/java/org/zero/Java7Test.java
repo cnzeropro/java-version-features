@@ -4,7 +4,10 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
 
 /**
  * @author zero
@@ -14,51 +17,43 @@ public class Java7Test {
     Java7 java7 = new Java7();
 
     @Test
-    public void addBinaryLiterals() {
-        System.out.println("Current test: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-        java7.addBinaryLiterals();
+    public void binaryLiteral() {
+        java7.binaryLiteral();
     }
 
     @Test
-    public void addUnderscoresInNumericLiterals() {
-        System.out.println("Current test: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-        java7.addUnderscoresInNumericLiterals();
+    public void underscoreInNumericLiteral() {
+        java7.underscoreInNumericLiteral();
     }
 
     @Test
-    public void addStringsInSwitchStatements() {
-        System.out.println("Current test: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-        java7.addStringsInSwitchStatements();
+    public void stringInSwitchStatement() {
+        java7.stringInSwitchStatement();
     }
 
     @Test
-    public void addTypeInference() {
-        System.out.println("Current test: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-        java7.addTypeInference();
+    public void typeInference() {
+        java7.typeInference();
     }
 
     @Test
-    public void improveCompilerWarningsAndErrors() {
-        System.out.println("Current test: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-        java7.improveCompilerWarningsAndErrors();
+    public void compilerWarningAndError() {
+        java7.compilerWarningAndError();
     }
 
     @Test
-    public void addTryWithResourcesStatement() {
-        System.out.println("Current test: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-        java7.addTryWithResourcesStatement();
+    public void tryWithResource() {
+        java7.tryWithResource();
     }
 
     @Test
-    public void improveCatchingMultipleException() {
-        System.out.println("Current test: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-        java7.improveCatchingMultipleException();
+    public void catchingMultipleException() {
+        java7.catchingMultipleException();
     }
 
     @Test
-    public void addThreadLocalRandomClass() {
-        System.out.println("Current test: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-        java7.addThreadLocalRandomClass();
+    public void threadLocalRandom() {
+        java7.threadLocalRandom();
     }
 
     @Before
@@ -68,7 +63,7 @@ public class Java7Test {
 
     @After
     public void tearDown() {
-        System.out.println("*************************************************** End ***************************************************");
+        System.out.println("*************************************************** End ***************************************************\n");
     }
 
     @BeforeClass
@@ -79,6 +74,13 @@ public class Java7Test {
     @AfterClass
     public static void destroy() {
         System.out.println("Java 7 Test End");
-        System.out.println("=============================================================================================================================\n");
     }
+
+    @Rule
+    public TestWatcher watchman = new TestWatcher() {
+        @Override
+        protected void starting(Description description) {
+            System.out.println("Current test: " + description.getMethodName());
+        }
+    };
 }

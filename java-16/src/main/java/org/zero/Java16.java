@@ -5,25 +5,16 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
 
 /**
- * <a href="https://docs.oracle.com/javase/16">JDK 16 Documentation</a>
- * <h2>Language Features</h2>
+ * <a href="https://openjdk.org/projects/jdk/16/">JDK 16</a>
+ * <a href="https://docs.oracle.com/javase/16/">JDK 16 Documentation</a>
+ * <h1>Features</h1>
  * <ol>
- *     <li>【update】instanceof 模式匹配（Pattern Matching for instanceof）{@link Java16#upgradeInstanceofKeyword()}</li>
- *     <li>【new】记录类（Record Classes）{@link Java16#addRecordClasses()}</li>
+ *     <li><a href="https://openjdk.org/jeps/394">394</a>：instanceof 模式匹配（Pattern Matching for instanceof）{@link #upgradeInstanceofKeyword()}</li>
+ *     <li><a href="https://openjdk.org/jeps/395">395</a>：记录类（Records）{@link #addRecordClasses()}</li>
+ *     <li>stream 类新增方法{@link #addMethodsForStream()} </li>
  * </ol>
- *
- * <h2>Previews and Incubator</h2>
  * <ol>
- *     <li>【new】密封类（Sealed Classes）（第二次预览）</li>
- * </ol>
- *
- * <h2>Libraries Improvements</h2>
- * <ol>
- *     <li>【new】stream 类新增方法。{@link Java16#addMethodsForStream()} </li>
- * </ol>
- *
- * <h2>Changes</h2>
- * <ol>
+ *     <li><a href="https://openjdk.org/jeps/397">397</a>：密封类（Sealed Classes）[第二次预览]</li>
  * </ol>
  *
  * @author Zero (cnzeropro@qq.com)

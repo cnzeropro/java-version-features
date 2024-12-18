@@ -5,35 +5,19 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 /**
- * <a href="https://docs.oracle.com/javase/12">JDK 12 Documentation</a>
- * <h2>Language Features</h2>
+ * <a href="https://openjdk.org/projects/jdk/12/">JDK 12</a>
+ * <a href="https://docs.oracle.com/javase/12/">JDK 12 Documentation</a>
+ * <h1>Features</h1>
  * <ol>
+ *     <li><a href="https://openjdk.org/jeps/334">334</a>：JVM 常量 API（JVM Constants API）{@link #addJvmConstantApi()}</li>
+ *     <li>支持紧凑的数字格式（Support for Compact Number Formatting）{@link #supportCompactNumberFormatting()}</li>
  * </ol>
- *
- * <h2>Previews and Incubator</h2>
  * <ol>
- *      <li>【update】switch 表达式（Switch Expressions）（首次预览）</li>
- * </ol>
- *
- * <h2>Libraries Improvements</h2>
- * <ol>
- *     <li>【new】JVM 常量 API（JVM Constants API）{@link Java12#addJvmConstantApi()}</li>
- *     <li>【new】支持紧凑的数字格式（Support for Compact Number Formatting）{@link Java12#supportCompactNumberFormatting()}</li>
- * </ol>
- *
- * <h2>Changes</h2>
- * <ol>
- *     <li>【update】支持 Unicode 11（Support for Unicode 11）</li>
- *     <li>【update】ZGC支持类卸载（ZGC Concurrent Class Unloading）。
- *     默认情况下，此功能处于启用状态，但可以使用命令行选项 -XX:-ClassUnloading 禁用此功能。</li>
- *     <li>【new】增添新的命令行标志。
- *     <ul>
- *         <li>-XX:+ExtensiveErrorReports（默认禁用）：以允许在 hs_err<pid>.log 文件中更广泛地报告崩溃的相关信息。</li>
- *     </ul>
- *     </li>
+ *      <li><a href="https://openjdk.org/jeps/325">325</a>：switch 表达式（Switch Expressions）[首次预览]</li>
  * </ol>
  *
  * @author Zero
+ * @since 2019/08/08
  */
 public class Java12 {
     public void addJvmConstantApi() {

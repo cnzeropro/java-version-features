@@ -19,58 +19,20 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * <a href="https://docs.oracle.com/javase/11">JDK 11 Documentation</a>
- * <h2>Language Features</h2>
+ * <a href="https://openjdk.org/projects/jdk/11/">JDK 11</a>
+ * <a href="https://docs.oracle.com/javase/11/">JDK 11 Documentation</a>
+ * <h1>Features</h1>
  * <ol>
- *     <li>【update】局部变量类型推断（Local Variable Type Inference）{@link Java11#enhanceVarIdentifier()}</li>
- * </ol>
- *
- * <h2>Previews and Incubator</h2>
- * <ol>
- *     <li>【new】新增 ZGC（ZGC A Scalable Low-Latency Garbage Collector）（实验性）。
- *     Z 垃圾回收器，也称为 ZGC，是一种可扩展的低延迟垃圾回收器。它旨在实现以下目标：
- *     <ul>
- *         <li>暂停时间不超过10毫秒</li>
- *         <li>暂停时间不会随着堆或 live-set 大小的增加而增加</li>
- *         <li>处理大小从几百兆字节到数万亿字节不等的堆</li>
- *     </ul>
- *     ZGC 作为实验性功能包含在内。因此，要启用它，需要将该 -XX:+UnlockExperimentalVMOptions 选项与 -XX:+UseZGC 该选项结合使用。
- *     </li>
- * </ol>
- *
- * <h2>Libraries Improvements</h2>
- * <ol>
- *     <li>【update】新增 String 类方法 {@link Java11#addMethodsForString()}</li>
- *     <li>【new】新增 HTTP Client API（HTTP Client）{@link Java11#addHttpClientApi()}</li>
- *     <li>【update】重载 toArray 方法（New Collection.toArray(IntFunction) Default Method）{@link Java11#overloadToArrayMethod()}</li>
- * </ol>
- *
- * <h2>Changes</h2>
- * <ol>
- *     <li>【update】java 文件直接运行。
- *     11以前，需要先编译生成 class 文件之后再运行；如今可以通过 java xxx.java 命令直接运行。</li>
- *     <li>支持 Unicode 标准版本 10.0（Unicode 10）</li>
- *     <li>【remove】不再提供 JRE 或 Server JRE，仅提供 JDK。
- *     用户可用于 jlink 创建较小的自定义运行时。</li>
- *     <li>【update】支持 Unicode 标准版本 10.0（Unicode 10）</li>
- *     <li>【new】延迟分配编译器线程（Lazy Allocation of Compiler Threads）。
- *     添加了新的命令行标志{@code -XX:+UseDynamicNumberOfCompilerThreads}（默认开启），用于动态控制编译器线程。
- *     在分层编译模式下（默认处于打开状态），VM 会在具有多核 CPU 的系统上启动大量编译器线程，而不考虑可用内存和编译请求数。
- *     由于线程即使在空闲时（几乎一直处于空闲状态）也会消耗内存，这会导致资源使用效率低下。
- *     为了解决此问题，更改为在启动期间每种类型的编译器线程仅启动一个，并动态处理其他线程的启动和关闭。
- *     </li>
- *     <li>【new】新增 Epsilon GC（Epsilon, A No-Op Garbage Collector）。
- *     Epsilon GC 是新的实验性无操作垃圾收集器。Epsilon GC 仅处理内存分配，不实现任何内存回收机制。
- *     </li>
- *     <li>【remove】删除{@link Thread#destroy}和{@link Thread#stop(Throwable)}方法（Removal of Thread.destroy() and Thread.stop(Throwable) Methods）</li>
- *     <li>【remove】从 Oracle JDK 中删除 JavaFX（Removal of JavaFX from the Oracle JDK）</li>
- *     <li>【remove】弃用 Nashorn JavaScript 引擎（Deprecate the Nashorn JavaScript Engine）。
- *     Nashorn JavaScript 引擎实现、API 和 jjs shell 工具已被弃用，可能会在将来的版本中删除。
- *     使用 link jdk.nashorn.api.tree 和 jdk.nashorn.api.scripting 包中的类和接口的代码将收到来自 javac 的弃用警告。
- *     </li>
+ *     <li><a href="https://openjdk.org/jeps/323">323</a>：局部变量类型推断（Local-Variable Syntax for Lambda Parameters）{@link #enhanceVarIdentifier()}</li>
+ *     <li>新增 String 类方法 {@link #addMethodsForString()}</li>
+ *     <li><a href="https://openjdk.org/jeps/321">321</a>：新增 HTTP Client API（HTTP Client）{@link #addHttpClientApi()}</li>
+ *     <li>重载 toArray 方法（New Collection.toArray(IntFunction) Default Method）{@link #overloadToArrayMethod()}</li>
+ *     <li><a href="https://openjdk.org/jeps/333">333</a>：新增 ZGC（ZGC: A Scalable Low-Latency Garbage Collector）[实验性]{@link #zgc()}</li>
+ *     <li><a href="https://openjdk.org/jeps/335">335</a>：弃用 Nashorn JavaScript 引擎（Deprecate the Nashorn JavaScript Engine）{@link #deprecateNashornEngine()}</li>
  * </ol>
  *
  * @author Zero
+ * @since 2019/01/24
  */
 public class Java11 {
 
@@ -111,24 +73,23 @@ public class Java11 {
      */
     @SneakyThrows
     public void addHttpClientApi() {
-        // java11以前发送http请求
+        // java 11 以前发送 http 请求
         HttpURLConnection httpURLConnection = (HttpURLConnection) URI.create("https://www.baidu.com/").toURL().openConnection();
         BufferedReader reader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream(), StandardCharsets.UTF_8));
         String content = reader.lines().collect(Collectors.joining("\n"));
         System.out.println(content);
 
-        // java11发送http请求
+        // java 11 发送 http 请求
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create("https://www.baidu.com/"))
                 .timeout(Duration.ofSeconds(5L))
                 .version(HttpClient.Version.HTTP_2)
                 .build();
-        HttpClient.newHttpClient()
-                .sendAsync(httpRequest, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8))
-                .thenApply(HttpResponse::body)
-                .thenAccept(System.out::println)
-                .join();
+        String body = HttpClient.newHttpClient()
+                .send(httpRequest, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8))
+                .body();
+        System.out.println(body);
     }
 
     /**
@@ -147,5 +108,30 @@ public class Java11 {
         // Java 11 重载
         String[] a2 = list.toArray(String[]::new);
         System.out.println(Arrays.toString(a2));
+    }
+
+    /**
+     * 新增 ZGC
+     * <p>
+     * Z 垃圾回收器，也称为 ZGC，是一种可扩展的低延迟垃圾回收器。它旨在实现以下目标：
+     * <ul>
+     *     <li>暂停时间不超过10毫秒</li>
+     *     <li>暂停时间不会随着堆或 live-set 大小的增加而增加</li>
+     *     <li>处理大小从几百兆字节到数万亿字节不等的堆</li>
+     * </ul>
+     * ZGC 作为实验性功能包含在内。因此，要启用它，需要将 {@code -XX:+UnlockExperimentalVMOptions} 选项与 {@code -XX:+UseZGC} 选项结合使用。
+     */
+    public void zgc() {
+
+    }
+
+    /**
+     * 弃用 Nashorn JavaScript 引擎
+     * <p>
+     * Nashorn JavaScript 引擎实现、API 和 jjs shell 工具已被弃用，可能会在将来的版本中删除。
+     * 使用 link jdk.nashorn.api.tree 和 jdk.nashorn.api.scripting 包中的类和接口的代码将收到来自 javac 的弃用警告。
+     */
+    public void deprecateNashornEngine() {
+
     }
 }
