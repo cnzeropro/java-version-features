@@ -5,7 +5,6 @@ package org.zero;
  * @date 2021/11/17 19:21
  */
 public record TriangleRecord(double a, double b, double c) {
-
     /**
      * 记录类默认存在全参构造，此处定义是为了调用初始化方法
      */

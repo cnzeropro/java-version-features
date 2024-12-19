@@ -30,6 +30,11 @@ public class Java16Test {
         java16.addMethodsForStream();
     }
 
+    @Test
+    public void unixSocketChannel() {
+        java16.unixSocketChannel();
+    }
+
     @Before
     public void setUp() {
         System.out.println("************************************************** Start **************************************************");

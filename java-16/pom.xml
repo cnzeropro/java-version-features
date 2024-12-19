@@ -11,7 +11,7 @@
 
     <artifactId>java-16</artifactId>
 
-    <name>java-16</name>
+    <name>java 16</name>
     <description>学习 Java 16 新特性</description>
 
     <build>
@@ -20,6 +20,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
+                    <release>16</release>
                     <source>16</source>
                     <target>16</target>
                 </configuration>
