@@ -1,74 +1,40 @@
 package org.zero;
 
-import java.util.Objects;
+import java.io.Serializable;
 
-public class Triangle {
-    protected double a;
-    protected double b;
-    protected double c;
-
-    public Triangle(double a, double b, double c) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.init();
+/**
+ * @author Zero (cnzeropro@163.com)
+ * @since 2024/12/19
+ */
+public interface Triangle extends Serializable {
+    /**
+     * 面积
+     * <p>
+     * 海伦公式（Heron's formula）：<br>
+     * <pre>{@code
+     * p = (a+b+c)/2
+     * S = √(p(p-a)(p-b)(p-c))
+     * }
+     * </pre>
+     *
+     * @return 面积
+     */
+    default strictfp double area() {
+        double p = (this.a() + this.b() + this.c()) / 2.0;
+        return Math.sqrt(p * (p - this.a()) * (p - this.b()) * (p - this.c()));
     }
 
-    private void init() {
-        if (a <= 0 || b <= 0 || c <= 0) {
+    default void check() {
+        if (this.a() <= 0 || this.b() <= 0 || this.c() <= 0) {
             throw new IllegalArgumentException("三角形三条边都必须大于0");
-        } else if (a + b <= c || a + c <= b || b + c <= a) {
+        } else if (this.a() + this.b() <= this.c() || this.a() + this.c() <= this.b() || this.b() + this.c() <= this.a()) {
             throw new IllegalArgumentException("三角形两边之和需大于第三边");
         }
     }
 
-    public double getA() {
-        return a;
-    }
+    double a();
 
-    public void setA(double a) {
-        this.a = a;
-    }
+    double b();
 
-    public double getB() {
-        return b;
-    }
-
-    public void setB(double b) {
-        this.b = b;
-    }
-
-    public double getC() {
-        return c;
-    }
-
-    public void setC(double c) {
-        this.c = c;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Triangle triangle = (Triangle) o;
-        return Double.compare(getA(), triangle.getA()) == 0 && Double.compare(getB(), triangle.getB()) == 0 && Double.compare(getC(), triangle.getC()) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getA(), getB(), getC());
-    }
-
-    @Override
-    public String toString() {
-        return "Triangle[" +
-                "a=" + a +
-                ", b=" + b +
-                ", c=" + c +
-                ']';
-    }
+    double c();
 }

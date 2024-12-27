@@ -11,7 +11,7 @@
 
     <artifactId>java-15</artifactId>
 
-    <name>java-15</name>
+    <name>java 15</name>
     <description>学习 Java 15 新特性</description>
 
     <build>
@@ -20,6 +20,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
+                    <release>15</release>
                     <source>15</source>
                     <target>15</target>
                 </configuration>

@@ -14,14 +14,14 @@ import java.lang.invoke.VarHandle;
  * <a href="https://docs.oracle.com/en/java/javase/23/">JDK 23 Documentation</a>
  * <h1>Features</h1>
  * <ol>
- *     <li><a href="https://openjdk.org/jeps/467">467</a>：Markdown 文档注释（Markdown Documentation Comments）{@link #introduceMarkdownDoc()}</li>
- *     <li><a href="https://openjdk.org/jeps/471">471</a>：废弃 {@link sun.misc.Unsafe} 中的 Memory-Access 方法（Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal）{@link #deprecateMemoryAccess()}</li>
- *     <li><a href="https://openjdk.org/jeps/474">474</a>：ZGC 默认为分代模式（ZGC: Generational Mode by Default）{@link #zgcGenerationalMode()}</li>
+ *     <li><a href="https://openjdk.org/jeps/467">467</a>：{@linkplain #introduceMarkdownDoc Markdown 文档注释（Markdown Documentation Comments）}</li>
+ *     <li><a href="https://openjdk.org/jeps/471">471</a>：{@linkplain #deprecateMemoryAccess 废弃 sun.misc.Unsafe 中的内存访问方法以移除（Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal）}</li>
+ *     <li><a href="https://openjdk.org/jeps/474">474</a>：{@linkplain #zgcGenerationalMode ZGC 默认为分代模式（ZGC: Generational Mode by Default）}</li>
  * </ol>
  * <ol>
  *     <li><a href="https://openjdk.org/jeps/455">455</a>：Patterns、instanceof 和 switch 中支持基本类型（Primitive Types in Patterns, instanceof, and switch）[首次预览]</li>
  *     <li><a href="https://openjdk.org/jeps/466">466</a>：类文件 API（Class-File API）[第二次预览]</li>
- *     <li><a href="https://openjdk.org/jeps/473">473</a>：流收集器（Stream Gatherers）[第二次预览]</li>
+ *     <li><a href="https://openjdk.org/jeps/473">473</a>：流采集器（Stream Gatherers）[第二次预览]</li>
  *     <li><a href="https://openjdk.org/jeps/476">476</a>：模块导入声明（Module Import Declarations）[首次预览]</li>
  *     <li><a href="https://openjdk.org/jeps/477">477</a>：匿名类和实例主方法（Implicitly Declared Classes and Instance Main Methods）[第三次预览]</li>
  *     <li><a href="https://openjdk.org/jeps/480">480</a>：结构化并发（Structured Concurrency）[第三次预览]</li>
@@ -37,7 +37,8 @@ import java.lang.invoke.VarHandle;
  */
 public class Java23 {
     /// # Markdown 文档注释
-    /// Java 23 允许使用 Markdown 编写 JavaDoc 文档注释，而不仅仅是使用 HTML 和 JavaDoc @-tag 的混合编写。以下是一些常用元素
+    /// Java 23 允许使用 Markdown 编写 JavaDoc 文档注释，而不仅仅是使用 HTML 和 JavaDoc @-tag 的混合编写。
+    /// 以下是一些常用元素：
     /// ## 表格（table）
     /// | Latin | Greek |
     /// |-------|-------|
@@ -69,7 +70,7 @@ public class Java23 {
     private void introduceMarkdownDoc() {
     }
 
-    /// 废弃 [link sun.misc.Unsafe] 中的 Memory-Access 方法
+    /// 废弃 [link sun.misc.Unsafe] 中的 Memory-Access 方法以移除
     ///
     /// @see java.lang.invoke
     /// @see java.lang.foreign
@@ -109,7 +110,7 @@ public class Java23 {
         System.out.println(memorySegment.get(ValueLayout.JAVA_LONG, 0));
     }
 
-    /// ZGC 默认为分代模式
+    /// ZGC 默认使用分代模式
     ///
     /// 以下是常用的命令行参数
     /// | 参数 | 说明 |
@@ -117,6 +118,8 @@ public class Java23 {
     /// | `-XX:+UseZGC` | 使用 ZGC |
     /// | `-XX:+ZGenerational` | 使用分代模式（ZGenerational 选项已弃用警告） |
     /// | `-XX:-ZGenerational` | 使用非分代模式（非分代模式已弃用 和 ZGenerational 选项已弃用警告） |
+    ///
+    /// @see <a href="https://openjdk.org/jeps/439">JEP 439: Generational ZGC</a>
     private void zgcGenerationalMode() {
     }
 }

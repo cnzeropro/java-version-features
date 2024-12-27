@@ -16,8 +16,8 @@ public class Java15Test {
     Java15 java15 = new Java15();
 
     @Test
-    public void introduceTextBlock() {
-        java15.introduceTextBlock();
+    public void textBlock() {
+        java15.textBlock();
     }
 
     @Test
@@ -26,13 +26,18 @@ public class Java15Test {
     }
 
     @Test
-    public void introduceHiddenClasses() {
-        java15.introduceHiddenClasses();
+    public void hiddenClasses() {
+        java15.hiddenClasses();
     }
 
     @Test
     public void overrideTreeMapMethod() {
         java15.overrideTreeMapMethod();
+    }
+
+    @Test
+    public void edDsa() {
+        java15.edDsa();
     }
 
     @Before

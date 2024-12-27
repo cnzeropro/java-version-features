@@ -13,19 +13,19 @@ import java.util.ServiceLoader;
  * <a href="https://docs.oracle.com/javase/18/">JDK 18 Documentation</a>
  * <h1>Features</h1>
  * <ol>
- *     <li><a href="https://openjdk.org/jeps/400">400</a>：默认字符集为 UTF-8（UTF-8 by Default）{@link #changeDefaultCharset()}</li>
- *     <li><a href="https://openjdk.org/jeps/408">408</a>：简易 Web 服务器（Simple Web Server）{@link #simpleWebServer()}</li>
- *     <li><a href="https://openjdk.org/jeps/418">418</a>：引入互联网地址解析的 SPI（Internet-Address Resolution SPI）{@link #addInternetAddressResolverSpi()}</li>
- *     <li><a href="https://openjdk.org/jeps/413">413</a>：文档注释中引入代码片段（Code Snippets in Java API Documentation）{@link #codeSnippet()}</li>
- *     <li><a href="https://openjdk.org/jeps/416">416</a>：使用方法句柄重写核心反射（Reimplement Core Reflection with Method Handles）{@link #reimplementCoreReflection()}</li>
- *     <li><a href="https://openjdk.org/jeps/421">421</a>：废弃终结机制（Deprecate Finalization for Removal）{@link #deprecateFinalization()}</li>
+ *     <li><a href="https://openjdk.org/jeps/400">400</a>：{@linkplain #changeDefaultCharset 默认字符集为 UTF-8（UTF-8 by Default）}</li>
+ *     <li><a href="https://openjdk.org/jeps/408">408</a>：{@linkplain #simpleWebServer 简易 Web 服务器（Simple Web Server）}</li>
+ *     <li><a href="https://openjdk.org/jeps/413">413</a>：{@linkplain #codeSnippet 文档注释中引入代码片段（Code Snippets in Java API Documentation）}</li>
+ *     <li><a href="https://openjdk.org/jeps/416">416</a>：{@linkplain #reimplementCoreReflection 使用方法句柄重写核心反射（Reimplement Core Reflection with Method Handles）}</li>
+ *     <li><a href="https://openjdk.org/jeps/418">418</a>：{@linkplain #addInternetAddressResolverSpi 引入互联网地址解析的 SPI（Internet-Address Resolution SPI）}</li>
+ *     <li><a href="https://openjdk.org/jeps/421">421</a>：{@linkplain #deprecateFinalization 废弃终结机制以删除（Deprecate Finalization for Removal）}</li>
  * </ol>
  * <ol>
  *     <li><a href="https://openjdk.org/jeps/420">420</a>：switch 模式匹配（Pattern Matching for switch）[第二次预览]</li>
  * </ol>
  * <ol>
  *     <li><a href="https://openjdk.org/jeps/417">417</a>：向量 API（Vector API）[第三次孵化]</li>
- *     <li><a href="https://openjdk.org/jeps/419">419</a>：外部函数和内存 API（Foreign Function & Memory API）[第四次孵化]</li>
+ *     <li><a href="https://openjdk.org/jeps/419">419</a>：外部函数和内存 API（Foreign Function & Memory API）[第二次孵化]</li>
  * </ol>
  *
  * @author Zero
@@ -95,6 +95,8 @@ public class Java18 {
     /**
      * 文档注释中引入代码片段
      * <p>
+     * 这一特性旨在通过提供更丰富、更具互动性的文档，帮助开发者更快地理解和使用 API。
+     * <p>
      * 之前：
      * <pre>{@code
      * public void sayHello() {
@@ -104,7 +106,7 @@ public class Java18 {
      * }
      * }</pre>
      * 现在：
-     * {@snippet :
+     * {@snippet lang = java:
      * public void sayHello() {
      *     Console console = System.console();
      *     String name = console.readLine();
@@ -146,7 +148,8 @@ public class Java18 {
      *     <li>未指定线程 - 终结器在未指定的线程上运行，顺序任意。无法控制线程或顺序。</li>
      * </ol>
      * 因此，从 Java 9 开始，废弃 {@link Object#finalize()} 方法，并引入了更安全的终结机制，以解决上述问题。<br>
-     * 到现在 Java 18，在已禁用或删除终结的 JVM 中运行时，垃圾回收器永远不会调用 {@linkplain Object#finalize() finalize}。
+     * 到现在 Java 18，{@linkplain Object#finalize() finalize} 方法不仅标记为弃用，并且预计在未来删除。
+     * 在已禁用或删除终结的 JVM 中运行时，垃圾回收器永远不会调用 {@linkplain Object#finalize() finalize}。
      * 在启用 Finalization 的 JVM 中，垃圾回收器可能仅在无限期延迟后调用 {@linkplain Object#finalize() finalize}。
      */
     @SneakyThrows

@@ -16,13 +16,13 @@ public class Java16Test {
     Java16 java16 = new Java16();
 
     @Test
-    public void addRecordClasses() {
-        java16.addRecordClasses();
+    public void recordClass() {
+        java16.recordClass();
     }
 
     @Test
-    public void upgradeInstanceofKeyword() {
-        java16.upgradeInstanceofKeyword();
+    public void instanceofPatternMatching() {
+        java16.instanceofPatternMatching();
     }
 
     @Test
@@ -31,8 +31,8 @@ public class Java16Test {
     }
 
     @Test
-    public void unixSocketChannel() {
-        java16.unixSocketChannel();
+    public void warningForValueBasedClass(){
+        java16.warningForValueBasedClass();
     }
 
     @Before

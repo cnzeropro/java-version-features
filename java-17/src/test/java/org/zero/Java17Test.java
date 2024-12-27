@@ -36,6 +36,11 @@ public class Java17Test {
         java17.enhancePRNG();
     }
 
+    @Test
+    public void deserializationFilter() {
+        java17.deserializationFilter();
+    }
+
     @Before
     public void setUp() {
         System.out.println("************************************************** Start **************************************************");

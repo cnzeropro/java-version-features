@@ -18,22 +18,22 @@ import java.util.regex.Pattern;
  * <a href="https://docs.oracle.com/javase/21/">JDK 21 Documentation</a>
  * <h1>Features</h1>
  * <ol>
- *     <li><a href="https://openjdk.org/jeps/441">441</a>：switch 模式匹配（Pattern Matching for switch Expressions and Statements）{@link #enhanceSwitchGrammar()}</li>
- *     <li><a href="https://openjdk.org/jeps/440">440</a>：记录模式（Record Patterns）{@link #recordPattern()}</li>
- *     <li><a href="https://openjdk.org/jeps/444">444</a>：虚拟线程（Virtual Threads）{@link #virtualThread()}</li>
- *     <li><a href="https://openjdk.org/jeps/431">431</a>：有序集合（Sequenced Collections）{@link #addSequencedCollections()}</li>
- *     <li>新增 Unicode 表情字符相关方法（Unicode Emoji Properties）{@link #addMethodsForCharacter()}</li>
- *     <li>新增 repeat 方法（New StringBuilder and StringBuffer repeat Methods）{@link #addRepeatMethod()}</li>
- *     <li>正则匹配支持 Emoji 字符（Emoji Related Binary Properties in RegEx）{@link #emojiInRegEx()}</li>
- *     <li><a href="https://openjdk.org/jeps/439">439</a>：分代 ZGC（Generational ZGC）{@link #generationalZgc()}</li>
+ *     <li><a href="https://openjdk.org/jeps/431">431</a>：{@linkplain #addSequencedCollections 有序集合（Sequenced Collections）}</li>
+ *     <li><a href="https://openjdk.org/jeps/439">439</a>：{@linkplain #generationalZgc 分代 ZGC（Generational ZGC）}</li>
+ *     <li><a href="https://openjdk.org/jeps/440">440</a>：{@linkplain #recordPattern 记录模式（Record Patterns）}</li>
+ *     <li><a href="https://openjdk.org/jeps/441">441</a>：{@linkplain #enhanceSwitchGrammar switch 模式匹配（Pattern Matching for switch）}</li>
+ *     <li><a href="https://openjdk.org/jeps/444">444</a>：{@linkplain #virtualThread 虚拟线程（Virtual Threads）}</li>
+ *     <li>{@linkplain #addMethodsForCharacter 新增 Unicode 表情字符相关方法（Unicode Emoji Properties）}</li>
+ *     <li>{@linkplain #addRepeatMethod 新增 repeat 方法（New StringBuilder and StringBuffer repeat Methods）}</li>
+ *     <li>{@linkplain #emojiInRegEx 正则匹配支持 Emoji 字符（Emoji Related Binary Properties in RegEx）}</li>
  * </ol>
  * <ol>
  *     <li><a href="https://openjdk.org/jeps/430">430</a>：字符串模板（String Templates）[首次预览]</li>
+ *     <li><a href="https://openjdk.org/jeps/442">442</a>：外部函数和内存 API（Foreign Function & Memory API）[第三次预览]</li>
  *     <li><a href="https://openjdk.org/jeps/443">443</a>：匿名模式和变量（Unnamed Patterns and Variables）[首次预览]</li>
  *     <li><a href="https://openjdk.org/jeps/445">445</a>：匿名类和实例主方法（Unnamed Classes and Instance Main Methods）[首次预览]</li>
  *     <li><a href="https://openjdk.org/jeps/446">446</a>：作用域值（Scoped Values）[首次预览]</li>
  *     <li><a href="https://openjdk.org/jeps/453">453</a>：结构化并发（Structured Concurrency）[首次预览]</li>
- *     <li><a href="https://openjdk.org/jeps/442">442</a>：外部函数和内存 API（Foreign Function & Memory API）[第三次预览]</li>
  * </ol>
  * <ol>
  *     <li><a href="https://openjdk.org/jeps/448">448</a>：向量 API（Vector API）[第六次孵化]</li>
@@ -48,6 +48,8 @@ public class Java21 {
      * <p>
      * 记录模式（Record Patterns）在 JDK 19 作为预览功能提出，经过不断讨论修改，最终在 JDK 21 引入。<br>
      * 作为模式匹配的扩展，它允许更简洁地解构记录类型（record），同时支持嵌套模式，实现更复杂的数据查询。
+     *
+     * @see <a href="https://openjdk.org/jeps/432">JEP 432: Record Patterns (Second Preview)</a>
      */
     public void recordPattern() {
         var cards = new Card[]{Poker.JOKER,
@@ -105,6 +107,8 @@ public class Java21 {
      * switch 模式匹配（Pattern Matching for switch Expressions and Statements）在 JDK 17 作为预览功能提出，经过不断讨论修改，最终在 JDK 21 引入。<br>
      * 它增强了 switch 语法，可以针对对象类型以及对象的内容进行更灵活、更简洁的条件判断。<br>
      * 例如，使其可以匹配 null，也可以配合 Record Patterns（记录模式）以及类型转换和类型推断使用。
+     *
+     * @see <a href="https://openjdk.org/jeps/433">JEP 433: Pattern Matching for switch (Fourth Preview)</a>
      */
     public void enhanceSwitchGrammar() {
         Card[] cards = {Poker.SPADE, Poker.HEART, Poker.DIAMOND, Poker.CLUB, Poker.JOKER,
@@ -231,6 +235,8 @@ public class Java21 {
      * 但并不是什么都一味使用虚拟线程就好，虚拟线程的使用也需要根据实际情况来决定。<br>
      * 如果一个任务原本就要 1s，无论使用平台线程还是虚拟线程，都需要 1s 才能完成，因此它并不能让单个任务计算得更快。<br>
      * 虚拟线程最大的优势是带来更高的吞吐量，所以面对大多是由 IO 密集型逻辑组成的任务时其可能是更好的选择，而 CPU 密集型任务中，过度使用虚拟线程可能不会带来预期的性能增益。
+     *
+     * @see <a href="https://openjdk.org/jeps/436">JEP 436: Virtual Threads (Second Preview)</a>
      */
     public void virtualThread() {
         Runnable printer = () -> System.out.println(Thread.currentThread().getName() + ": Hello, world!");
@@ -323,7 +329,9 @@ public class Java21 {
      * <p>
      * 通过扩展 ZGC 来维护年轻对象和年老对象的独立生成，从而提高应用程序性能。
      * 主要为了以下三点：降低分配停滞的风险，降低所需的堆内存开销，以及降低垃圾回收 CPU 开销。
-     * 可使用命令行选项 -XX:+UseZGC -XX:+ZGenerational 启用分代 ZGC。
+     * 可使用命令行选项 {@code -XX:+UseZGC -XX:+ZGenerational} 启用分代 ZGC。
+     *
+     * @see <a href="https://openjdk.org/jeps/377">JEP 377: ZGC: A Scalable Low-Latency Garbage Collector (Production)</a>
      */
     private void generationalZgc() {
     }

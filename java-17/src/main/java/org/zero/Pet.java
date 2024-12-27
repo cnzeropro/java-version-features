@@ -3,13 +3,15 @@ package org.zero;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.io.Serializable;
+
 /**
  * @author Zero (cnzeropro@qq.com)
  * @date 2021/11/17 19:43
  */
 @Getter
 @AllArgsConstructor
-public sealed class Pet permits Cat, Dog, Pig {
+public sealed class Pet implements Serializable permits Cat, Dog, Pig {
     private String name;
     private Integer age;
 

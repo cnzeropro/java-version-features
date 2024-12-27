@@ -21,10 +21,10 @@ import java.util.concurrent.ThreadLocalRandom;
  * <a href="https://docs.oracle.com/en/java/javase/22/">JDK 22 Documentation</a>
  * <h2>Features</h2>
  * <ol>
- *     <li><a href="https://openjdk.org/jeps/454">454</a>：外部函数和内存 API（Foreign Function & Memory API）{@link #foreignFunctionAndMemoryApi()}</li>
- *     <li><a href="https://openjdk.org/jeps/458">458</a>：启动多文件源代码程序（Launch Multi-File Source-Code Programs）{@link #launchMultiFileProgram()}</li>
- *     <li><a href="https://openjdk.org/jeps/456">456</a>：匿名变量和模式（Unnamed Variables & Patterns）{@link #unnamedVariableAndPattern()}</li>
- *     <li><a href="https://openjdk.org/jeps/423">423</a>：G1 引入区域固定机制（Region Pinning for G1）{@link #g1RegionPinning()}</li>
+ *     <li><a href="https://openjdk.org/jeps/423">423</a>：{@linkplain #g1RegionPinning G1 引入区域固定机制（Region Pinning for G1）}</li>
+ *     <li><a href="https://openjdk.org/jeps/454">454</a>：{@linkplain #foreignFunctionAndMemoryApi 外部函数和内存 API（Foreign Function & Memory API）}</li>
+ *     <li><a href="https://openjdk.org/jeps/456">456</a>：{@linkplain #unnamedVariableAndPattern 匿名变量与模式（Unnamed Variables & Patterns）}</li>
+ *     <li><a href="https://openjdk.org/jeps/458">458</a>：{@linkplain #launchMultiFileProgram 启动多文件源代码程序（Launch Multi-File Source-Code Programs）}</li>
  * </ol>
  * <ol>
  *     <li><a href="https://openjdk.org/jeps/447">447</a>：允许在构造函数的 super(...) 调用之前执行语句（Statements Before super(...)）[首次预览]</li>
@@ -57,6 +57,8 @@ public class Java22 {
      *     FM 提供了一套新的类和方法来管理和操作非 Java 堆上的内存。相比传统的 {@link sun.misc.Unsafe} 类，FM 提供了更好的封装性和安全性，同时保持了必要的性能优势。
      *     </li>
      * </ol>
+     *
+     * @see <a href="https://openjdk.org/jeps/442">JEP 442: Foreign Function & Memory API (Third Preview)</a>
      */
     @SneakyThrows
     public void foreignFunctionAndMemoryApi() {
@@ -154,13 +156,15 @@ public class Java22 {
      * 现在 JAVA 22 优化了该项限制，允许源代码放在不同的 {@code .java} 文件中，甚至可以放在其他 jar 中
      *
      * @see org.zero.Main
+     * @see <a href="https://openjdk.org/jeps/330">JEP 330: Launch Single-File Source-Code Programs</a>
      */
     private void launchMultiFileProgram() {
     }
 
     /**
      * 匿名变量和模式
-     *
+     * 在 Java 22 中，引入了未命名变量（Unnamed Variables）和模式（Patterns）的新特性，旨在进一步简化代码编写，减少冗余，并提高开发效率。
+     * 这些新特性允许开发者使用更简洁的语法来处理常见的编程任务，尤其是在涉及类型检查、解构赋值以及数据处理的情况下。
      * <ol>
      *     <li>各种代码块中的局部变量</li>
      *     <li>lambda 表达式的形参</li>
@@ -169,6 +173,8 @@ public class Java22 {
      *     <li>foreach 循环变量</li>
      *     <li>catch 块的异常参数</li>
      * </ol>
+     *
+     * @see <a href="https://openjdk.org/jeps/443">JEP 443: Unnamed Patterns and Variables (Preview)</a>
      */
     public void unnamedVariableAndPattern() {
         /*
