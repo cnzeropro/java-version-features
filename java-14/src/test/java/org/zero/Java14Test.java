@@ -25,6 +25,11 @@ public class Java14Test {
         java14.supportAccountingCurrencyFormat();
     }
 
+    @Test
+    public void jfrEventStreaming() {
+        java14.jfrEventStreaming();
+    }
+
     @Before
     public void setUp() {
         System.out.println("************************************************** Start **************************************************");
