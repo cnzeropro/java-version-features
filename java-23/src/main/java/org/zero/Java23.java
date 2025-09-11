@@ -63,10 +63,10 @@ public class Java23 {
     /// ## 代码块（code）
     /// ```java
     /// public class Example {
-    ///     public void example() {
-    ///     }
-    /// }
-    /// ```
+    ///     public void example(){
+    ///}
+    ///}
+    ///```
     private void introduceMarkdownDoc() {
     }
 
@@ -113,9 +113,10 @@ public class Java23 {
     /// ZGC 默认使用分代模式
     ///
     /// 以下是常用的命令行参数
+    ///
     /// | 参数 | 说明 |
-    /// |-------|-------|
-    /// | `-XX:+UseZGC` | 使用 ZGC |
+    /// | - | - |
+    /// | `-XX:+UseZGC`| 使用 ZGC |
     /// | `-XX:+ZGenerational` | 使用分代模式（ZGenerational 选项已弃用警告） |
     /// | `-XX:-ZGenerational` | 使用非分代模式（非分代模式已弃用 和 ZGenerational 选项已弃用警告） |
     ///

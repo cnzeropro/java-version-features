@@ -23,6 +23,12 @@ import java.util.concurrent.ThreadLocalRandom;
  *     <li><a href="https://openjdk.org/jeps/349">349</a>：{@linkplain #jfrEventStreaming JFR 事件流（JFR Event Streaming）}</li>
  *     <li><a href="https://openjdk.org/jeps/352">352</a>：{@linkplain #nonVolatileMappedByteBuffer 非易失性映射字节缓冲区（Non-Volatile Mapped Byte Buffers）}</li>
  *     <li><a href="https://openjdk.org/jeps/361">361</a>：{@linkplain #improveSwitchExpression switch 表达式（Switch Expressions）}</li>
+ *     <li><a href="https://openjdk.org/jeps/362">362</a>：{@linkplain #deprecateSolarisAndSPARCPorts 弃用 Solaris 和 SPARC 版本（Deprecate the Solaris and SPARC Ports）}</li>
+ *     <li><a href="https://openjdk.org/jeps/363">363</a>：{@linkplain #removeCMSGC 移除并发标记清除（CMS）垃圾收集器（Remove the Concurrent Mark Sweep (CMS) Garbage Collector）}</li>
+ *     <li><a href="https://openjdk.org/jeps/364">364</a>：{@linkplain #portZGCOnMacOS 移植 ZGC 到 macOS（ZGC on macOS (Experimental)）}</li>
+ *     <li><a href="https://openjdk.org/jeps/365">365</a>：{@linkplain #portZGCOnWindows 移植 ZGC 到 Windows（ZGC on Windows (Experimental)）}</li>
+ *     <li><a href="https://openjdk.org/jeps/366">366</a>：{@linkplain #deprecateParallelScavengeAndSerialOld 弃用 ParallelScavenge + SerialOld GC 组合（Deprecate the ParallelScavenge + SerialOld GC Combination）}</li>
+ *     <li><a href="https://openjdk.org/jeps/367">367</a>：{@linkplain #removePack200ToolsAndAPI 移除 Pack200 工具和 API（Remove the Pack200 Tools and API）}</li>
  *     <li>{@linkplain #supportAccountingCurrencyFormat 支持会计币种格式（Accounting Currency Format Support）}</li>
  * </ol>
  * <ol>
@@ -219,7 +225,7 @@ public class Java14 {
             // 启动事件流
             recordingStream.startAsync();
 
-            Thread.sleep(10_000);
+            Thread.sleep(3_000);
 
             // 将事件流导出到文件（Java 17）
             // recordingStream.dump(Path.of("events.jfr"));
@@ -253,6 +259,54 @@ public class Java14 {
             buffer.get(readData);
             System.out.println(new String(readData, StandardCharsets.UTF_8));
         }
+    }
+
+    /**
+     * 弃用 Solaris/SPARC、Solaris/x64 和 Linux/SPARC 的移植，计划在未来版本中移除它们
+     *
+     * @see <a href="https://openjdk.org/jeps/381">JEP 381: Remove the Solaris and SPARC Ports</a>
+     */
+    private void deprecateSolarisAndSPARCPorts() {
+    }
+
+    /**
+     * 移除 CMS（Concurrent Mark Sweep）垃圾收集器
+     *
+     * @see <a href="https://openjdk.org/jeps/291">JEP 291: Deprecate the Concurrent Mark Sweep (CMS) Garbage Collector</a>
+     */
+    private void removeCMSGC() {
+    }
+
+    /**
+     * 在 MacOS 上支持 ZGC
+     *
+     * @see <a href="https://openjdk.org/jeps/333">JEP 333: ZGC: A Scalable Low-Latency Garbage Collector (Experimental)</a>
+     * @see <a href="https://openjdk.org/jeps/377">JEP 377: ZGC: A Scalable Low-Latency Garbage Collector (Production)</a>
+     */
+    private void portZGCOnMacOS() {
+    }
+
+    /**
+     * 在 Windows 上支持 ZGC
+     *
+     * @see <a href="https://openjdk.org/jeps/333">JEP 333: ZGC: A Scalable Low-Latency Garbage Collector (Experimental)</a>
+     * @see <a href="https://openjdk.org/jeps/377">JEP 377: ZGC: A Scalable Low-Latency Garbage Collector (Production)</a>
+     */
+    private void portZGCOnWindows() {
+    }
+
+    /**
+     * 弃用 Parallel Scavenge 和 Serial Old 垃圾回收算法的组合
+     */
+    private void deprecateParallelScavengeAndSerialOld() {
+    }
+
+    /**
+     * 移除 Pack200 工具和 API
+     *
+     * @see <a href="https://openjdk.org/jeps/336">JEP 336: Deprecate the Pack200 Tools and API</a>
+     */
+    private void removePack200ToolsAndAPI() {
     }
 }
 

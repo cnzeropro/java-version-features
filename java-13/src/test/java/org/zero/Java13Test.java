@@ -20,6 +20,11 @@ public class Java13Test {
         java13.overloadMethodsForFileSystems();
     }
 
+    @Test
+    public void addMethodsForByteBuffer() {
+        java13.addMethodsForByteBuffer();
+    }
+
     @Before
     public void setUp() {
         System.out.println("************************************************** Start **************************************************");

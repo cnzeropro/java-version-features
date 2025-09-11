@@ -16,8 +16,8 @@ public class Java12Test {
     Java12 java12 = new Java12();
 
     @Test
-    public void addJvmConstantApi() {
-        java12.addJvmConstantApi();
+    public void jvmConstantApi() {
+        java12.jvmConstantApi();
     }
 
     @Test
