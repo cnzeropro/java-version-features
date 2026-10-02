@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>learn-java-new-features</artifactId>
+        <artifactId>java-version-features</artifactId>
         <groupId>org.zero</groupId>
         <version>1.0.0</version>
     </parent>

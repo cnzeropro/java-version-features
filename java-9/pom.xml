@@ -5,7 +5,7 @@
 
     <parent>
         <groupId>org.zero</groupId>
-        <artifactId>learn-java-new-features</artifactId>
+        <artifactId>java-version-features</artifactId>
         <version>1.0.0</version>
     </parent>
 

@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.zero</groupId>
-    <artifactId>learn-java-new-features</artifactId>
+    <artifactId>java-version-features</artifactId>
     <version>1.0.0</version>
 
     <packaging>pom</packaging>
@@ -32,8 +32,8 @@
         <module>java-23</module>
     </modules>
 
-    <name>Learn Java New Features</name>
-    <description>学习 Java 新特性</description>
+    <name>Java Version Features</name>
+    <description>按 Java 版本整理的新特性示例（Java 3 - 23）</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -1,0 +1,8 @@
+# 文本文件自动归一化，统一以 LF 存入仓库
+* text=auto eol=lf
+
+# Java 源码启用 Git 内置 diff 驱动，便于评审类型与方法级变更
+*.java text diff=java
+
+# 二进制测试资源（Java 序列化数据）不参与文本归一化与 diff
+*.data binary
